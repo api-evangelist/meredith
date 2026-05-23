@@ -1,0 +1,150 @@
+name: People Inc / Dotdash Meredith Commercial Plans
+description: |
+  People Inc has no public developer-API plan surface. Its commercial offering
+  is structured around B2B advertising, brand licensing, consumer magazine
+  subscriptions, and direct content licensing — all transacted via direct
+  sales, not self-serve. This file captures the addressable commercial
+  surfaces using the API Commons Plans 0.1 shape, with the explicit caveat
+  that pricing is RFQ / per-engagement and not published.
+url: https://raw.githubusercontent.com/api-evangelist/meredith/main/plans/meredith-plans-pricing.yml
+created: '2026-05-23'
+modified: '2026-05-23'
+specificationVersion: 'plans-0.1'
+providerId: meredith
+providerName: People Inc
+
+plans:
+
+  - id: dcipher-contextual-advertising
+    name: D/Cipher Contextual Advertising
+    surface: B2B Media Buy
+    selfServe: false
+    pricingModel: rfq
+    pricing:
+      type: Custom
+      currency: USD
+      notes: |
+        Sold via direct sales. Typical engagements are six- and seven-figure
+        annual brand-campaign commitments. No CPM rate card is publicly
+        listed; performance is reported against benchmark norms (per
+        People Inc's advertising page: "Lucid Industry Norm; 146 Campaigns
+        2023-2025 (weighted by impressions)").
+    contact: advertising@peopleinc.com
+    portal: https://www.people.inc/dcipher
+
+  - id: branded-content-and-experiences
+    name: Branded Content + Experiences
+    surface: B2B Sponsorship
+    selfServe: false
+    pricingModel: rfq
+    pricing:
+      type: Custom
+      currency: USD
+      notes: |
+        Marquee experiential franchises include PEOPLE's Red Carpet Access,
+        the FOOD & WINE Classic (Aspen + Charleston), Travel + Leisure
+        World's Best Summit, Entertainment Weekly's Comic-Con Bash, the
+        Southern Living Idea House, the REAL SIMPLE Home, Byrdie Social
+        Club, BHG Red Plaid Café, and InStyle Imagemaker Awards.
+    contact: advertising@peopleinc.com
+    portal: https://www.people.inc/advertising
+
+  - id: awards-and-accolades-licensing
+    name: Editorial Award Seal Licensing
+    surface: Brand Licensing
+    selfServe: false
+    pricingModel: rfq
+    pricing:
+      type: Custom
+      currency: USD
+      notes: |
+        Awards & Accolades team licenses editorial-award seals and mentions
+        from People Inc's essential brands for on-package, retail, and
+        marketing use.
+    contact: licensing@peopleinc.com
+    portal: https://www.people.inc/advertising
+
+  - id: brand-licensing
+    name: Brand Licensing
+    surface: Brand Licensing
+    selfServe: false
+    pricingModel: rfq
+    pricing:
+      type: Royalty
+      currency: USD
+      notes: |
+        Wholesale brand licensing for retail goods bearing People Inc brand
+        names. Per License Global's Top Licensors Report 2024, People Inc
+        is a top global licensor.
+    contact: licensing@peopleinc.com
+
+  - id: content-licensing
+    name: Editorial Content Licensing
+    surface: Content Syndication
+    selfServe: false
+    pricingModel: rfq
+    pricing:
+      type: Custom
+      currency: USD
+      notes: |
+        Syndication and reuse rights for People Inc editorial content sold
+        on a per-engagement basis. Notably contrasts with the company's
+        robots.txt policy against unlicensed AI ingestion — paid licensing
+        is the sanctioned ingestion path.
+    contact: licensing@peopleinc.com
+
+  - id: targeted-media-health
+    name: Targeted Media Health (Point-of-Care)
+    surface: Healthcare Marketing
+    selfServe: false
+    pricingModel: rfq
+    pricing:
+      type: Custom
+      currency: USD
+      notes: |
+        Point-of-care media and HCP marketing across digital and print
+        channels via People Inc's health brand portfolio.
+    contact: advertising@peopleinc.com
+
+  - id: media-now-interactive
+    name: Media Now Interactive
+    surface: Media Planning + Buying
+    selfServe: false
+    pricingModel: managed-service
+    pricing:
+      type: Custom
+      currency: USD
+      notes: |
+        Full-service media planning and buying agency operating inside
+        People Inc.
+    contact: advertising@peopleinc.com
+
+  - id: consumer-magazine-subscriptions
+    name: Consumer Magazine Subscriptions
+    surface: Direct-To-Consumer
+    selfServe: true
+    pricingModel: per-title
+    pricing:
+      type: Subscription
+      currency: USD
+      notes: |
+        Per-title print + digital subscriptions sold via each brand's
+        subscription page (PEOPLE, Better Homes & Gardens, Real Simple,
+        Southern Living, InStyle, EatingWell, Food & Wine, Allrecipes,
+        Entertainment Weekly, Parents, Travel + Leisure, etc.). Per
+        Wikipedia (2025 figures): "People has approximately 2.2 million
+        paid subscribers across print and digital editions, making it one
+        of the largest magazine audiences in the United States."
+    contact: subscriptions@peopleinc.com
+
+absences:
+  - notFound: Self-Serve Developer API Plans
+    rationale: |
+      People Inc does not sell metered API access to its content. There is
+      no developer portal, no API key issuance flow, no published rate card.
+  - notFound: Marketplace / App Store
+    rationale: |
+      No partner marketplace, no third-party app gallery, no integration hub.
+  - notFound: Free Developer Tier
+    rationale: |
+      No free tier exists. All commercial surfaces are RFQ.

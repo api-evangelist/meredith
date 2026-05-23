@@ -1,0 +1,91 @@
+name: People Inc / Dotdash Meredith FinOps Profile
+description: |
+  People Inc has no metered consumption API, so traditional FOCUS-style
+  consumption tracking does not apply. This file maps the addressable
+  commercial surfaces (B2B advertising, brand licensing, magazine
+  subscriptions, content licensing) to the FinOps Framework's
+  cost-allocation lens for buyers who treat People Inc as a vendor.
+url: https://raw.githubusercontent.com/api-evangelist/meredith/main/finops/meredith-finops.yml
+created: '2026-05-23'
+modified: '2026-05-23'
+specificationVersion: 'finops-0.1'
+providerId: meredith
+providerName: People Inc
+
+billing:
+  model: Direct Sales / Insertion Order
+  selfServe: false
+  invoicing:
+    cadence: Per-engagement or monthly per IO
+    currency: USD
+    portal: Direct from People Inc accounts receivable
+  contact:
+    advertising: advertising@peopleinc.com
+    licensing: licensing@peopleinc.com
+    subscriptions: subscriptions@peopleinc.com
+
+costCategories:
+
+  - id: advertising-spend
+    focusCategory: ServiceCategory
+    focusSubCategory: Media
+    chargeFrequency: Recurring
+    units: Impressions, CPM, Sponsorship Package
+    description: |
+      D/Cipher contextual ad spend, branded content, programmatic across
+      People Inc brand inventory, and experiential franchise sponsorships
+      (e.g. FOOD & WINE Classic).
+    typicalEngagementSize: Six- to seven-figure annual commitment
+
+  - id: brand-licensing
+    focusCategory: ServiceCategory
+    focusSubCategory: IntellectualProperty
+    chargeFrequency: Royalty + Minimum Guarantee
+    units: Royalty Rate, Minimum Guarantee
+    description: |
+      Use of People Inc brand marks on retail products. Top global licensor
+      per License Global's Top Licensors Report 2024.
+
+  - id: editorial-seal-licensing
+    focusCategory: ServiceCategory
+    focusSubCategory: IntellectualProperty
+    chargeFrequency: Per Mark / Per Term
+    units: Licensed Mark
+    description: |
+      Awards & Accolades editorial-seal licensing for use in advertising,
+      PR, and on-package marketing.
+
+  - id: content-syndication
+    focusCategory: ServiceCategory
+    focusSubCategory: Content
+    chargeFrequency: Per License / Subscription
+    units: Article, Per-Word, Per-Title
+    description: |
+      Syndication of People Inc editorial content to third-party
+      publishers and platforms.
+
+  - id: consumer-subscriptions
+    focusCategory: Other
+    focusSubCategory: ConsumerSubscription
+    chargeFrequency: Annual or Monthly
+    units: Per Magazine Title
+    description: |
+      Direct consumer subscriptions to print + digital magazine titles.
+      Not a B2B cost category but relevant for households tracking
+      household media spend.
+
+allocation:
+  recommendation: |
+    Map People Inc spend to GL via vendor "People Inc" (formerly "Dotdash
+    Meredith") with sub-cost-centers per IO / per licensing agreement.
+    Tag campaigns with the brand (PEOPLE, BHG, etc.) and franchise so
+    finance and marketing share a shared view.
+
+absences:
+  - notFound: FOCUS-Aligned Billing Export
+    rationale: |
+      People Inc is not a cloud / API provider; no FOCUS / cost-and-usage
+      report export exists. Cost allocation is done from invoices and IOs.
+  - notFound: Tag-Based Cost Attribution
+    rationale: |
+      No tag/label system; attribution is at IO / contract granularity.

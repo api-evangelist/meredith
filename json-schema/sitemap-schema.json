@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/meredith/main/json-schema/sitemap-schema.json",
+  "title": "PeopleIncSitemap",
+  "description": "JSON-equivalent shape for the XML sitemap surface exposed by every People Inc brand under /sitemap.xml. The root document is a sitemap index containing references to per-section sitemap files (e.g. /sitemap_1.xml). Modeled per sitemaps.org 0.9 with the lastmod field that People Inc populates daily.",
+  "type": "object",
+  "required": ["sitemapindex"],
+  "properties": {
+    "sitemapindex": {
+      "type": "object",
+      "required": ["sitemaps"],
+      "properties": {
+        "xmlns": { "type": "string", "const": "http://www.sitemaps.org/schemas/sitemap/0.9" },
+        "sitemaps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["loc"],
+            "properties": {
+              "loc": { "type": "string", "format": "uri", "description": "Absolute URL of a child sitemap file." },
+              "lastmod": { "type": "string", "format": "date", "description": "Last-modified date for the referenced sitemap; People Inc brands typically update this daily." }
+            }
+          }
+        }
+      }
+    },
+    "urlset": {
+      "type": "object",
+      "description": "Alternative shape: a leaf sitemap file containing URL entries.",
+      "required": ["urls"],
+      "properties": {
+        "xmlns": { "type": "string", "const": "http://www.sitemaps.org/schemas/sitemap/0.9" },
+        "urls": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["loc"],
+            "properties": {
+              "loc": { "type": "string", "format": "uri" },
+              "lastmod": { "type": "string", "format": "date" },
+              "changefreq": { "type": "string", "enum": ["always", "hourly", "daily", "weekly", "monthly", "yearly", "never"] },
+              "priority": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          }
+        }
+      }
+    }
+  }
+}

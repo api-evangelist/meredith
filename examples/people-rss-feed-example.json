@@ -1,0 +1,34 @@
+{
+  "channel": {
+    "title": "People",
+    "link": "https://people.com/",
+    "description": "Celebrity News, Exclusives, Photos and Videos",
+    "language": "en-US",
+    "copyright": "Copyright People Inc.",
+    "lastBuildDate": "2026-05-23T14:02:00Z",
+    "generator": "People Inc Publishing Platform",
+    "image": {
+      "url": "https://people.com/static/people-logo.png",
+      "title": "People",
+      "link": "https://people.com/"
+    },
+    "items": [
+      {
+        "title": "Example Cover Story Headline",
+        "link": "https://people.com/example-cover-story-12345",
+        "guid": "https://people.com/example-cover-story-12345",
+        "pubDate": "2026-05-23T13:45:00Z",
+        "description": "<p>Short HTML dek summarizing the article body.</p>",
+        "creator": "Jane Reporter",
+        "category": ["Movies", "Awards"],
+        "mediaContent": {
+          "url": "https://people.com/thmb/example-lead.jpg",
+          "medium": "image",
+          "width": 1200,
+          "height": 800,
+          "credit": "Getty Images"
+        }
+      }
+    ]
+  }
+}

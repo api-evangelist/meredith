@@ -1,0 +1,106 @@
+name: People Inc / Dotdash Meredith Vocabulary
+description: |
+  Domain vocabulary covering the People Inc (formerly Dotdash Meredith) media
+  publishing operation. Captures corporate-structure terms, brand categories,
+  content surfaces, advertising products, and the AI-bot-policy regime that
+  governs machine access to the brand portfolio.
+url: https://raw.githubusercontent.com/api-evangelist/meredith/main/vocabulary/meredith-vocabulary.yml
+created: '2026-05-23'
+modified: '2026-05-23'
+
+terms:
+
+  - term: People Inc
+    definition: |
+      Corporate name of America's largest digital and print publisher as of
+      July 31, 2025. Subsidiary of IAC. Operates 40+ consumer brands.
+    aliases:
+      - PEOPLE Inc
+      - PeopleInc
+
+  - term: Dotdash Meredith
+    definition: |
+      Prior corporate name (December 2021 to July 31, 2025) for the entity
+      formed when IAC's Dotdash acquired Meredith Corporation's magazine
+      and digital assets for $2.7 billion.
+    aliases:
+      - DDM
+
+  - term: Meredith Corporation
+    definition: |
+      Founded by Edwin Thomas Meredith in 1902 as the publisher of Successful
+      Farming. Acquired Time Inc in 2017 (~$1.85B). Sold its broadcast
+      division to Gray Television and its magazine/digital assets to IAC's
+      Dotdash on December 1, 2021.
+
+  - term: Dotdash
+    definition: |
+      Formerly About.com (founded 1997 as The Mining Company). Acquired by
+      IAC in 2012 for $300M. Rebranded to Dotdash in 2017. Operator of the
+      Verywell, The Spruce, Investopedia, Lifewire, and Treehugger brand
+      stack pre-Meredith acquisition.
+
+  - term: IAC
+    definition: |
+      InterActiveCorp — NYSE-listed holding company headquartered in New York
+      led by Joey Levin. Parent of People Inc, Angi, Care.com, Vimeo, and
+      the Daily Beast. Spun off Match Group, Expedia, Ticketmaster, and
+      multiple other companies over its history ("30 years, 10 public
+      companies").
+
+  - term: D/Cipher
+    definition: |
+      People Inc's proprietary cookieless intent-based contextual advertising
+      platform. Derives signals from how readers engage with content across
+      the brand portfolio and matches them to advertiser intent without
+      relying on third-party cookies. Sold as a B2B media buy.
+
+  - term: Specialty Marketing Solutions
+    definition: |
+      Bundle of B2B services within People Inc: Content Solutions (custom
+      content marketing), Awards & Accolades (editorial-seal licensing),
+      Targeted Media Health (point-of-care), Media Now Interactive (media
+      planning/buying), and Content Licensing.
+
+  - term: AI Bot Policy
+    definition: |
+      The robots.txt-encoded policy applied uniformly across People Inc brand
+      domains. Fully disallows ClaudeBot, Claude-Web, anthropic-ai, CCBot,
+      news-please, cohere-ai, ImagesiftBot, FriendlyCrawler, Quora-Bot,
+      omgilibot, omgili, PerplexityBot, and others. Partially restricts
+      ChatGPT-User, OAI-SearchBot, and GPTBot (blocking the /thmb/ image
+      path). Explicitly allows Pinterest and Pinterestbot.
+
+  - term: Essential Brands
+    definition: |
+      People Inc's term for its top-tier consumer brand portfolio; the brands
+      surfaced on the brand-licensing and editorial-seal product surface.
+
+  - term: Brand Licensing
+    definition: |
+      Revenue line where People Inc grants third parties the right to use
+      brand names, marks, and editorial accolades on retail products and
+      marketing. People Inc is a top global licensor per License Global.
+
+  - term: RSS Feed
+    definition: |
+      The canonical machine-readable article surface on every People Inc
+      consumer brand domain at /feed (RSS 2.0). The closest thing the company
+      has to a developer API for content.
+
+  - term: Sitemap Index
+    definition: |
+      The XML sitemap index at /sitemap.xml on each brand domain referencing
+      per-section sitemap files (/sitemap_1.xml … /sitemap_N.xml). Updated
+      daily. The canonical machine-readable URL inventory.
+
+categories:
+  - Health
+  - Finance
+  - Food And Drink
+  - Home
+  - Beauty And Style
+  - Travel
+  - Tech And Sustainability
+  - Entertainment
+  - Premium Publishing

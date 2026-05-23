@@ -1,0 +1,545 @@
+name: Dotdash Meredith / People Inc
+description: |
+  Profile for People Inc (formerly Dotdash Meredith) in the API Evangelist network.
+  America's largest digital and print publisher, operating 40+ brands including
+  PEOPLE, Better Homes & Gardens, Allrecipes, Investopedia, Verywell, Food & Wine,
+  Southern Living, Real Simple, Travel + Leisure, Byrdie, InStyle, The Spruce,
+  EatingWell, Serious Eats, Simply Recipes, Brides, Health, Shape, Parents,
+  Entertainment Weekly, Lifewire, TreeHugger, TripSavvy, The Balance, and more.
+  An IAC (NASDAQ: IAC) operating company since the December 2021 merger of
+  Dotdash and Meredith Corporation ($2.7B transaction); rebranded to "People Inc."
+  on July 31, 2025 to elevate the company's flagship brand. There is no public
+  read/write developer API surface — the addressable machine-readable surface is
+  per-brand RSS feeds, XML sitemaps, robots.txt policy declarations, and the
+  D/Cipher intent-based contextual advertising platform sold as a B2B media buy
+  (no self-serve developer console). All major brand domains explicitly disallow
+  ClaudeBot, anthropic-ai, GPTBot (partial), CCBot, PerplexityBot, and other AI
+  crawlers in robots.txt, reflecting the company's stance on unlicensed model
+  training against its content corpus.
+url: https://raw.githubusercontent.com/api-evangelist/meredith/main/apis.yml
+humanURL: https://www.people.inc/
+baseURL: https://www.people.inc/
+image: https://avatars.githubusercontent.com/u/46611466?v=4
+tags:
+  - Media
+  - Publishing
+  - Magazines
+  - Content
+  - Advertising
+  - Contextual Advertising
+  - Lifestyle
+  - News
+  - RSS
+  - Sitemaps
+  - Robots
+  - AI Policy
+  - IAC
+created: '2025-05-05'
+modified: '2026-05-23'
+specificationVersion: '0.18'
+type: Index
+aid: meredith
+access: 3rd-Party
+position: Consumer
+
+apis:
+
+  - name: PEOPLE RSS Feeds
+    description: |
+      RSS 2.0 feeds for People.com, the flagship celebrity-and-human-interest
+      brand of People Inc. People.com is the largest property in the portfolio
+      (~187M monthly visits per 2025 estimates). Section feeds expose recent
+      article URLs, titles, descriptions, publish dates, and authors.
+    humanURL: https://people.com/
+    baseURL: https://people.com/
+    image: https://www.iac.com/sites/default/files/brand-logos/people-logo.png
+    tags:
+      - PEOPLE
+      - Celebrity
+      - Entertainment
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://people.com/feed
+      - type: Portal
+        url: https://people.com/
+      - type: GitHubRepository
+        url: https://github.com/api-evangelist/meredith
+      - type: JSONSchema
+        url: https://raw.githubusercontent.com/api-evangelist/meredith/main/json-schema/rss-feed-schema.json
+
+  - name: Better Homes & Gardens RSS Feeds
+    description: |
+      RSS 2.0 feeds for BHG.com, People Inc's flagship home + gardening brand
+      and the second-largest US monthly magazine by circulation.
+    humanURL: https://www.bhg.com/
+    baseURL: https://www.bhg.com/
+    tags:
+      - Better Homes And Gardens
+      - Home
+      - Garden
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.bhg.com/feed
+      - type: Portal
+        url: https://www.bhg.com/
+
+  - name: Allrecipes RSS Feeds
+    description: |
+      RSS feeds for Allrecipes.com, the largest food brand in the portfolio
+      and one of the most-trafficked recipe sites globally.
+    humanURL: https://www.allrecipes.com/
+    baseURL: https://www.allrecipes.com/
+    tags:
+      - Allrecipes
+      - Food
+      - Recipes
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.allrecipes.com/feed/
+      - type: Portal
+        url: https://www.allrecipes.com/
+
+  - name: Investopedia RSS Feeds
+    description: |
+      RSS feeds for Investopedia.com, the dominant retail-investor finance
+      reference site in the portfolio. Carries dictionary-style term entries
+      and breaking finance/markets articles.
+    humanURL: https://www.investopedia.com/
+    baseURL: https://www.investopedia.com/
+    tags:
+      - Investopedia
+      - Finance
+      - Investing
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.investopedia.com/feeds/rss/articles
+      - type: Portal
+        url: https://www.investopedia.com/
+
+  - name: Verywell Family RSS Feeds
+    description: |
+      RSS feeds across the Verywell sub-brands (Verywell Health, Verywell Mind,
+      Verywell Fit). Largest consumer-health network in the US per Comscore.
+    humanURL: https://www.verywellhealth.com/
+    baseURL: https://www.verywellhealth.com/
+    tags:
+      - Verywell
+      - Health
+      - Mental Health
+      - Fitness
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.verywellhealth.com/feed
+      - type: APIReference
+        url: https://www.verywellmind.com/feed
+      - type: APIReference
+        url: https://www.verywellfit.com/feed
+
+  - name: Food & Wine RSS Feeds
+    description: RSS feeds for Food & Wine, the culinary lifestyle brand.
+    humanURL: https://www.foodandwine.com/
+    baseURL: https://www.foodandwine.com/
+    tags:
+      - Food And Wine
+      - Food
+      - Wine
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.foodandwine.com/feed
+      - type: Portal
+        url: https://www.foodandwine.com/
+
+  - name: Real Simple RSS Feeds
+    description: RSS feeds for Real Simple, a Home + Lifestyle brand.
+    humanURL: https://www.realsimple.com/
+    baseURL: https://www.realsimple.com/
+    tags:
+      - Real Simple
+      - Home
+      - Lifestyle
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.realsimple.com/feed
+
+  - name: Southern Living RSS Feeds
+    description: RSS feeds for Southern Living, a regional lifestyle brand.
+    humanURL: https://www.southernliving.com/
+    baseURL: https://www.southernliving.com/
+    tags:
+      - Southern Living
+      - Lifestyle
+      - South
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.southernliving.com/feed
+
+  - name: Travel + Leisure RSS Feeds
+    description: RSS feeds for Travel + Leisure, the brand that also seeds the publicly-traded Wyndham Destinations spin-off.
+    humanURL: https://www.travelandleisure.com/
+    baseURL: https://www.travelandleisure.com/
+    tags:
+      - Travel And Leisure
+      - Travel
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.travelandleisure.com/feed
+
+  - name: Byrdie RSS Feeds
+    description: RSS feeds for Byrdie, the People Inc beauty brand.
+    humanURL: https://www.byrdie.com/
+    baseURL: https://www.byrdie.com/
+    tags:
+      - Byrdie
+      - Beauty
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.byrdie.com/feed
+
+  - name: InStyle RSS Feeds
+    description: RSS feeds for InStyle, fashion and beauty brand.
+    humanURL: https://www.instyle.com/
+    baseURL: https://www.instyle.com/
+    tags:
+      - InStyle
+      - Fashion
+      - Beauty
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.instyle.com/feed
+
+  - name: Brides RSS Feeds
+    description: RSS feeds for Brides, the wedding planning brand.
+    humanURL: https://www.brides.com/
+    baseURL: https://www.brides.com/
+    tags:
+      - Brides
+      - Weddings
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.brides.com/feed
+
+  - name: EatingWell RSS Feeds
+    description: RSS feeds for EatingWell, the healthy-eating food brand.
+    humanURL: https://www.eatingwell.com/
+    baseURL: https://www.eatingwell.com/
+    tags:
+      - EatingWell
+      - Food
+      - Nutrition
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.eatingwell.com/feed
+
+  - name: Serious Eats RSS Feeds
+    description: RSS feeds for Serious Eats, the technique-driven food brand.
+    humanURL: https://www.seriouseats.com/
+    baseURL: https://www.seriouseats.com/
+    tags:
+      - Serious Eats
+      - Food
+      - Cooking
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.seriouseats.com/feed
+
+  - name: Simply Recipes RSS Feeds
+    description: RSS feeds for Simply Recipes.
+    humanURL: https://www.simplyrecipes.com/
+    baseURL: https://www.simplyrecipes.com/
+    tags:
+      - Simply Recipes
+      - Food
+      - Recipes
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.simplyrecipes.com/feed
+
+  - name: The Spruce RSS Feeds
+    description: RSS feeds for The Spruce, The Spruce Eats, and The Spruce Pets.
+    humanURL: https://www.thespruce.com/
+    baseURL: https://www.thespruce.com/
+    tags:
+      - The Spruce
+      - Home
+      - Pets
+      - Food
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.thespruce.com/feed
+      - type: APIReference
+        url: https://www.thespruceeats.com/feed
+      - type: APIReference
+        url: https://www.thesprucepets.com/feed
+
+  - name: Health RSS Feeds
+    description: RSS feeds for Health, the wellness magazine brand.
+    humanURL: https://www.health.com/
+    baseURL: https://www.health.com/
+    tags:
+      - Health
+      - Wellness
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.health.com/feed
+
+  - name: Shape RSS Feeds
+    description: RSS feeds for Shape, the fitness and women's wellness brand.
+    humanURL: https://www.shape.com/
+    baseURL: https://www.shape.com/
+    tags:
+      - Shape
+      - Fitness
+      - Wellness
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.shape.com/feed
+
+  - name: Parents RSS Feeds
+    description: RSS feeds for Parents, the family + parenting brand.
+    humanURL: https://www.parents.com/
+    baseURL: https://www.parents.com/
+    tags:
+      - Parents
+      - Parenting
+      - Family
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.parents.com/feed
+
+  - name: Entertainment Weekly RSS Feeds
+    description: RSS feeds for Entertainment Weekly.
+    humanURL: https://ew.com/
+    baseURL: https://ew.com/
+    tags:
+      - Entertainment Weekly
+      - Entertainment
+      - Pop Culture
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://ew.com/feed
+
+  - name: Lifewire RSS Feeds
+    description: RSS feeds for Lifewire, the consumer-tech how-to brand.
+    humanURL: https://www.lifewire.com/
+    baseURL: https://www.lifewire.com/
+    tags:
+      - Lifewire
+      - Tech
+      - Consumer Electronics
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.lifewire.com/feed
+
+  - name: Treehugger RSS Feeds
+    description: RSS feeds for Treehugger, the sustainability and environment brand.
+    humanURL: https://www.treehugger.com/
+    baseURL: https://www.treehugger.com/
+    tags:
+      - Treehugger
+      - Sustainability
+      - Environment
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.treehugger.com/feed
+
+  - name: TripSavvy RSS Feeds
+    description: RSS feeds for TripSavvy, the travel guides brand.
+    humanURL: https://www.tripsavvy.com/
+    baseURL: https://www.tripsavvy.com/
+    tags:
+      - TripSavvy
+      - Travel
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.tripsavvy.com/feed
+
+  - name: The Balance RSS Feeds
+    description: RSS feeds for The Balance Money, personal finance brand.
+    humanURL: https://www.thebalancemoney.com/
+    baseURL: https://www.thebalancemoney.com/
+    tags:
+      - The Balance
+      - Personal Finance
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.thebalancemoney.com/feed
+
+  - name: Daily Paws RSS Feeds
+    description: RSS feeds for Daily Paws, the pets brand.
+    humanURL: https://www.dailypaws.com/
+    baseURL: https://www.dailypaws.com/
+    tags:
+      - Daily Paws
+      - Pets
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.dailypaws.com/feed
+
+  - name: Martha Stewart RSS Feeds
+    description: RSS feeds for MarthaStewart.com, the home/lifestyle brand.
+    humanURL: https://www.marthastewart.com/
+    baseURL: https://www.marthastewart.com/
+    tags:
+      - Martha Stewart
+      - Home
+      - Lifestyle
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.marthastewart.com/feed
+
+  - name: Liquor.com RSS Feeds
+    description: RSS feeds for Liquor.com, the spirits and cocktail brand.
+    humanURL: https://www.liquor.com/
+    baseURL: https://www.liquor.com/
+    tags:
+      - Liquor
+      - Spirits
+      - Cocktails
+      - RSS
+    properties:
+      - type: APIReference
+        url: https://www.liquor.com/feed
+
+  - name: XML Sitemaps Across Properties
+    description: |
+      Every People Inc brand exposes a discoverable sitemap index at /sitemap.xml
+      with per-section sitemap files. These are the canonical machine-readable
+      index of all published URLs on each brand. Useful for content auditing,
+      compliance, and inventory work — but governed by the robots.txt AI policy.
+    humanURL: https://www.allrecipes.com/sitemap.xml
+    baseURL: https://www.allrecipes.com/sitemap.xml
+    tags:
+      - Sitemaps
+      - XML
+      - Discovery
+    properties:
+      - type: APIReference
+        url: https://www.people.com/sitemap.xml
+      - type: APIReference
+        url: https://www.allrecipes.com/sitemap.xml
+      - type: APIReference
+        url: https://www.investopedia.com/sitemap.xml
+      - type: APIReference
+        url: https://www.bhg.com/sitemap.xml
+      - type: APIReference
+        url: https://www.foodandwine.com/sitemap.xml
+      - type: APIReference
+        url: https://www.realsimple.com/sitemap.xml
+      - type: APIReference
+        url: https://www.southernliving.com/sitemap.xml
+
+  - name: D/Cipher Contextual Advertising Platform
+    description: |
+      D/Cipher is People Inc's proprietary intent-based contextual advertising
+      platform — a cookieless targeting solution that derives audience-intent
+      signals from how readers engage across People Inc's owned-and-operated
+      brand portfolio. Sold as a B2B media buy via the People Inc advertising
+      team (no self-serve developer console, no public API). Surfaced via
+      the corporate advertising page; integrations with brands run via direct
+      IO + branded content rather than a public REST surface.
+    humanURL: https://www.people.inc/dcipher
+    baseURL: https://www.people.inc/dcipher
+    tags:
+      - D/Cipher
+      - Advertising
+      - Contextual
+      - AdTech
+      - Cookieless
+    properties:
+      - type: Portal
+        url: https://www.people.inc/dcipher
+      - type: Contact
+        url: mailto:advertising@peopleinc.com
+      - type: APIReference
+        url: https://www.people.inc/advertising
+
+  - name: Specialty Marketing Solutions (SMS) Suite
+    description: |
+      A bundle of B2B services run by People Inc with no public developer
+      surface but with discrete branded sub-products: Content Solutions
+      (content marketing consultancy), Awards & Accolades (licensing of
+      editorial-award seals), Targeted Media Health (point-of-care
+      advertising), Media Now Interactive (media planning + buying), and
+      Content Licensing (content syndication). All transacted via direct sales.
+    humanURL: https://www.people.inc/advertising
+    baseURL: https://www.people.inc/advertising
+    tags:
+      - Specialty Marketing Solutions
+      - Content Marketing
+      - Licensing
+      - Point Of Care
+    properties:
+      - type: Portal
+        url: https://www.people.inc/advertising
+
+common:
+
+  - type: Portal
+    url: https://www.people.inc/
+  - type: Portal
+    url: https://www.iac.com/brands/peopleinc
+  - type: Blog
+    url: https://www.people.inc/news-awards
+  - type: ChangeLog
+    url: https://www.people.inc/news-awards
+  - type: GitHubOrganization
+    url: https://github.com/MeredithCorp
+  - type: GitHubRepository
+    url: https://github.com/MeredithCorp/sqs-consumer
+  - type: GitHubOrganization
+    url: https://github.com/People-INC
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/peopleinc-us/
+  - type: TermsOfService
+    url: https://www.people.inc/terms-of-service
+  - type: PrivacyPolicy
+    url: https://www.people.inc/privacy-policy
+  - type: Compliance
+    url: https://www.people.inc/iac-code-of-business-conduct-and-ethics
+  - type: Contact
+    url: mailto:advertising@peopleinc.com
+  - type: Contact
+    url: mailto:marketing@peopleinc.com
+  - type: Contact
+    url: mailto:press@peopleinc.com
+  - type: Contact
+    url: mailto:subscriptions@peopleinc.com
+  - type: Contact
+    url: mailto:licensing@peopleinc.com
+  - type: Pricing
+    url: https://raw.githubusercontent.com/api-evangelist/meredith/main/plans/meredith-plans-pricing.yml
+  - type: RateLimits
+    url: https://raw.githubusercontent.com/api-evangelist/meredith/main/rate-limits/meredith-rate-limits.yml
+  - type: JSONLD
+    url: https://raw.githubusercontent.com/api-evangelist/meredith/main/json-ld/meredith-context.jsonld
+
+maintainers:
+  - FN: Kin Lane
+    email: info@apievangelist.com
+    url: https://kinlane.com

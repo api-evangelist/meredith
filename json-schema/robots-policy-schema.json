@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/meredith/main/json-schema/robots-policy-schema.json",
+  "title": "PeopleIncRobotsPolicy",
+  "description": "Captures the per-brand robots.txt policy observed across People Inc properties (people.com, allrecipes.com, investopedia.com, bhg.com, etc). Most brands publish an explicit AI-bot blocklist: ClaudeBot, Claude-Web, anthropic-ai, GPTBot (paths restricted), ChatGPT-User (paths restricted), CCBot, news-please, cohere-ai, ImagesiftBot, FriendlyCrawler, Quora-Bot, omgilibot, omgili, PerplexityBot. Schema is provider-defined (no W3C standard).",
+  "type": "object",
+  "required": ["host", "userAgentRules"],
+  "properties": {
+    "host": { "type": "string", "format": "hostname", "description": "Brand domain the policy applies to." },
+    "fetchedAt": { "type": "string", "format": "date-time" },
+    "userAgentRules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["userAgent"],
+        "properties": {
+          "userAgent": { "type": "string", "description": "User-agent token from the rule block." },
+          "disallow": { "type": "array", "items": { "type": "string" } },
+          "allow": { "type": "array", "items": { "type": "string" } },
+          "comment": { "type": "string" }
+        }
+      }
+    },
+    "sitemaps": {
+      "type": "array",
+      "items": { "type": "string", "format": "uri" },
+      "description": "Sitemap URLs declared via Sitemap: directives, if any."
+    },
+    "aiBotPolicy": {
+      "type": "object",
+      "description": "Derived summary of how the brand treats AI crawlers.",
+      "properties": {
+        "fullyBlocked": {
+          "type": "array",
+          "description": "User agents that are Disallow: / across all paths.",
+          "items": { "type": "string" }
+        },
+        "partiallyRestricted": {
+          "type": "array",
+          "description": "User agents allowed but with specific paths disallowed (e.g. /thmb/).",
+          "items": { "type": "string" }
+        },
+        "allowed": {
+          "type": "array",
+          "description": "AI / search crawlers explicitly permitted (e.g. Pinterest, Pinterestbot).",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-structure.org/draft/2025-01/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/meredith/main/json-structure/brand-structure.json",
+  "title": "PeopleIncBrand",
+  "description": "Structural shape of a People Inc brand entry as represented in the apis.yml index of this repo. Captures the brand's category, primary domain, RSS surface, sitemap surface, robots.txt URL, and the parent publisher.",
+  "type": "object",
+  "required": ["name", "domain", "category", "parent"],
+  "properties": {
+    "name": { "type": "string" },
+    "domain": { "type": "string", "format": "hostname" },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Health",
+        "Finance",
+        "Food And Drink",
+        "Home",
+        "Beauty And Style",
+        "Travel",
+        "Tech And Sustainability",
+        "Entertainment",
+        "Premium Publishing"
+      ]
+    },
+    "parent": { "type": "string", "const": "People Inc" },
+    "rssFeedUrl": { "type": "string", "format": "uri" },
+    "sitemapUrl": { "type": "string", "format": "uri" },
+    "robotsUrl": { "type": "string", "format": "uri" },
+    "monthlyVisitors": { "type": "integer", "description": "Estimated monthly unique visitors where published." },
+    "printEdition": { "type": "boolean", "description": "Whether the brand has an active print magazine edition." }
+  }
+}

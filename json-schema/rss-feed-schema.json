@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/meredith/main/json-schema/rss-feed-schema.json",
+  "title": "PeopleIncRSSFeed",
+  "description": "Canonical JSON-equivalent schema for an RSS 2.0 channel exposed by a People Inc brand (e.g. people.com/feed, allrecipes.com/feed). Captures the channel envelope and the typical item shape observed across the portfolio. Field cardinalities reflect the RSS 2.0 spec; media:content and dc:creator are present on most brands.",
+  "type": "object",
+  "required": ["channel"],
+  "properties": {
+    "channel": {
+      "type": "object",
+      "required": ["title", "link", "description", "items"],
+      "properties": {
+        "title": { "type": "string", "description": "Brand name as the feed title (e.g. 'Allrecipes')." },
+        "link": { "type": "string", "format": "uri", "description": "Homepage URL of the brand." },
+        "description": { "type": "string", "description": "Short brand tagline used as the feed description." },
+        "language": { "type": "string", "examples": ["en-US"] },
+        "copyright": { "type": "string" },
+        "lastBuildDate": { "type": "string", "format": "date-time" },
+        "generator": { "type": "string", "description": "Publishing platform / CMS generator string." },
+        "image": {
+          "type": "object",
+          "properties": {
+            "url": { "type": "string", "format": "uri" },
+            "title": { "type": "string" },
+            "link": { "type": "string", "format": "uri" }
+          }
+        },
+        "items": {
+          "type": "array",
+          "description": "Array of RSS items (articles).",
+          "items": { "$ref": "#/$defs/RSSItem" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "RSSItem": {
+      "type": "object",
+      "required": ["title", "link", "pubDate"],
+      "properties": {
+        "title": { "type": "string" },
+        "link": { "type": "string", "format": "uri" },
+        "guid": { "type": "string", "description": "Permanent unique identifier; on People Inc brands typically equals the canonical article URL." },
+        "pubDate": { "type": "string", "format": "date-time" },
+        "description": { "type": "string", "description": "HTML-allowed summary / dek for the article." },
+        "creator": { "type": "string", "description": "dc:creator — author byline." },
+        "category": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ],
+          "description": "Editorial section / topic taxonomy term(s)."
+        },
+        "mediaContent": {
+          "type": "object",
+          "description": "media:content element — lead image for the article.",
+          "properties": {
+            "url": { "type": "string", "format": "uri" },
+            "medium": { "type": "string", "enum": ["image", "video"] },
+            "width": { "type": "integer", "minimum": 1 },
+            "height": { "type": "integer", "minimum": 1 },
+            "credit": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

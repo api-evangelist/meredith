@@ -1,0 +1,52 @@
+{
+  "host": "www.people.com",
+  "fetchedAt": "2026-05-23T16:00:00Z",
+  "userAgentRules": [
+    { "userAgent": "*", "disallow": ["*.pdf", "/embed?"] },
+    { "userAgent": "Pinterest", "disallow": [""] },
+    { "userAgent": "Pinterestbot", "disallow": [""] },
+    { "userAgent": "ChatGPT-User", "disallow": ["/thmb/"] },
+    { "userAgent": "OAI-SearchBot", "disallow": ["/thmb/"] },
+    { "userAgent": "GPTBot", "disallow": ["/thmb/"] },
+    { "userAgent": "CCBot", "disallow": ["/"] },
+    { "userAgent": "news-please", "disallow": ["/"] },
+    { "userAgent": "anthropic-ai", "disallow": ["/"] },
+    { "userAgent": "ClaudeBot", "disallow": ["/"] },
+    { "userAgent": "Claude-Web", "disallow": ["/"] },
+    { "userAgent": "cohere-ai", "disallow": ["/"] },
+    { "userAgent": "ImagesiftBot", "disallow": ["/"] },
+    { "userAgent": "FriendlyCrawler", "disallow": ["/"] },
+    { "userAgent": "Quora-Bot", "disallow": ["/"] },
+    { "userAgent": "omgilibot", "disallow": ["/"] },
+    { "userAgent": "omgili", "disallow": ["/"] },
+    { "userAgent": "PerplexityBot", "disallow": ["/"] }
+  ],
+  "sitemaps": [
+    "https://www.people.com/sitemap.xml"
+  ],
+  "aiBotPolicy": {
+    "fullyBlocked": [
+      "CCBot",
+      "news-please",
+      "anthropic-ai",
+      "ClaudeBot",
+      "Claude-Web",
+      "cohere-ai",
+      "ImagesiftBot",
+      "FriendlyCrawler",
+      "Quora-Bot",
+      "omgilibot",
+      "omgili",
+      "PerplexityBot"
+    ],
+    "partiallyRestricted": [
+      "ChatGPT-User",
+      "OAI-SearchBot",
+      "GPTBot"
+    ],
+    "allowed": [
+      "Pinterest",
+      "Pinterestbot"
+    ]
+  }
+}

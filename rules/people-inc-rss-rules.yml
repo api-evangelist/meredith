@@ -1,0 +1,22 @@
+extends: ["spectral:oas"]
+rules:
+  rss-feed-schema-id-required:
+    description: People Inc RSS-feed JSON Schema artifacts MUST declare a stable $id under the meredith repo path.
+    severity: error
+    given: "$"
+    then:
+      field: "$id"
+      function: pattern
+      functionOptions:
+        match: "^https://raw.githubusercontent.com/api-evangelist/meredith/main/json-schema/.+\\.json$"
+  rss-feed-title-required:
+    description: Every channel object MUST include title, link, description, items.
+    severity: error
+    given: "$.properties.channel.required"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          contains:
+            enum: [title, link, description, items]

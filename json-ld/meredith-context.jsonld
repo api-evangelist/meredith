@@ -1,0 +1,59 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "rss": "http://purl.org/rss/1.0/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "media": "http://search.yahoo.com/mrss/",
+    "sitemap": "http://www.sitemaps.org/schemas/sitemap/0.9",
+    "peopleinc": "https://www.people.inc/vocab#",
+    "Publisher": "schema:NewsMediaOrganization",
+    "Brand": "schema:Brand",
+    "Article": "schema:NewsArticle",
+    "Magazine": "schema:Periodical",
+    "AdvertisingPlatform": "peopleinc:AdvertisingPlatform",
+    "ContextualSignal": "peopleinc:ContextualSignal",
+    "name": "schema:name",
+    "url": "schema:url",
+    "logo": "schema:logo",
+    "parentOrganization": "schema:parentOrganization",
+    "subOrganization": "schema:subOrganization",
+    "brand": "schema:brand",
+    "publishingPrinciples": "schema:publishingPrinciples",
+    "headline": "schema:headline",
+    "datePublished": "schema:datePublished",
+    "dateModified": "schema:dateModified",
+    "author": "schema:author",
+    "image": "schema:image",
+    "articleSection": "schema:articleSection",
+    "keywords": "schema:keywords",
+    "isPartOf": "schema:isPartOf",
+    "rssFeed": "peopleinc:rssFeed",
+    "sitemap": "peopleinc:sitemap",
+    "robotsTxt": "peopleinc:robotsTxt",
+    "aiBotPolicy": "peopleinc:aiBotPolicy",
+    "monthlyVisitors": "peopleinc:monthlyVisitors",
+    "category": "peopleinc:category",
+    "printEdition": "peopleinc:printEdition",
+    "contextualIntent": "peopleinc:contextualIntent",
+    "Dotdash": "peopleinc:Dotdash",
+    "Meredith": "peopleinc:Meredith",
+    "DCipher": "peopleinc:DCipher",
+    "SpecialtyMarketingSolutions": "peopleinc:SpecialtyMarketingSolutions"
+  },
+  "@graph": [
+    {
+      "@type": "Publisher",
+      "@id": "https://www.people.inc/#org",
+      "name": "People Inc",
+      "url": "https://www.people.inc/",
+      "logo": "https://avatars.githubusercontent.com/u/46611466?v=4",
+      "parentOrganization": {
+        "@type": "schema:Corporation",
+        "name": "IAC Inc",
+        "url": "https://www.iac.com/"
+      },
+      "schema:description": "America's largest digital and print publisher; the corporate entity formed by the December 2021 merger of Dotdash and Meredith Corporation, rebranded from Dotdash Meredith to People Inc on July 31, 2025."
+    }
+  ]
+}

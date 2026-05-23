@@ -1,0 +1,121 @@
+name: People Inc / Dotdash Meredith Rate Limits and Bot Policy
+description: |
+  People Inc does not publish numerical rate limits because it does not run a
+  public developer API. The addressable machine-readable surface is rate-
+  shaped at the CDN/WAF edge across each brand domain, with per-bot policy
+  declarations in /robots.txt. This file documents the observed policy regime
+  using the API Commons Rate Limits 0.1 shape.
+url: https://raw.githubusercontent.com/api-evangelist/meredith/main/rate-limits/meredith-rate-limits.yml
+created: '2026-05-23'
+modified: '2026-05-23'
+specificationVersion: 'rate-limits-0.1'
+providerId: meredith
+providerName: People Inc
+
+policies:
+
+  - id: cdn-edge-shaping
+    surface: All Brand Domains
+    type: edge-rate-shaping
+    appliesTo:
+      - https://www.people.com
+      - https://www.allrecipes.com
+      - https://www.investopedia.com
+      - https://www.bhg.com
+      - https://www.foodandwine.com
+      - https://www.realsimple.com
+      - https://www.southernliving.com
+      - https://www.verywellhealth.com
+      - https://www.byrdie.com
+      - https://www.travelandleisure.com
+      - https://www.eatingwell.com
+      - https://www.thespruce.com
+      - https://www.simplyrecipes.com
+      - https://www.seriouseats.com
+      - https://www.health.com
+      - https://www.shape.com
+      - https://www.brides.com
+      - https://www.instyle.com
+      - https://www.parents.com
+      - https://ew.com
+      - https://www.lifewire.com
+      - https://www.treehugger.com
+      - https://www.tripsavvy.com
+      - https://www.thebalancemoney.com
+      - https://www.thespruceeats.com
+      - https://www.thesprucepets.com
+      - https://www.liquor.com
+      - https://www.dailypaws.com
+      - https://www.marthastewart.com
+    observedBehavior:
+      defaultUserAgent: |
+        Requests with a non-browser User-Agent (e.g. "curl/8.x", "python-
+        requests", default tool UAs) receive an immediate HTTP 403 across
+        every brand. The WAF appears to enforce this at the edge before
+        path-level rules.
+      browserUserAgent: |
+        Requests with a realistic browser User-Agent succeed at human-pace
+        rates. No documented per-IP budget.
+      sitemap: |
+        /sitemap.xml is consistently served regardless of UA (per RFC
+        9309 / sitemaps.org expectations).
+      robotsTxt: |
+        /robots.txt is always served and is the canonical statement of
+        permitted access.
+
+  - id: ai-bot-policy
+    surface: All Brand Domains
+    type: robots-policy
+    appliesToHostsPattern: "*.{brand-domain}"
+    rules:
+      fullyBlocked:
+        - CCBot
+        - news-please
+        - anthropic-ai
+        - ClaudeBot
+        - Claude-Web
+        - cohere-ai
+        - ImagesiftBot
+        - FriendlyCrawler
+        - Quora-Bot
+        - omgilibot
+        - omgili
+        - PerplexityBot
+      partiallyRestricted:
+        agents:
+          - ChatGPT-User
+          - OAI-SearchBot
+          - GPTBot
+        restriction: "Disallow: /thmb/ (the image-transform / thumbnail subtree)"
+      explicitlyAllowed:
+        - Pinterest
+        - Pinterestbot
+    notes: |
+      The blocklist is identical across People.com, Allrecipes.com,
+      Investopedia.com, BHG.com (and likely every other brand) — strong
+      evidence that People Inc maintains a single corporate robots.txt
+      template that propagates to all brand domains.
+
+  - id: rss-feed-shaping
+    surface: Per-Brand /feed Endpoint
+    type: implicit-rate-limit
+    appliesTo:
+      - https://{brand-domain}/feed
+      - https://{brand-domain}/{section}/feed
+    observedBehavior: |
+      No published rate limit. Requests with a realistic User-Agent at
+      human-pace (1 request per second per brand) reliably return RSS
+      content. Bursts and bot-class UAs trigger the same edge 403 as the
+      site at large.
+
+guidance:
+  - audience: Naftiko-class Agents
+    recommendation: |
+      Honor the per-brand robots.txt. Use the people-inc-rss and people-inc-
+      sitemap capabilities (which already set realistic UAs and respect
+      bot policy). Avoid bulk crawls.
+  - audience: Governance / Rights Management Teams
+    recommendation: |
+      Use the ai-bot-policy-audit capability to capture a snapshot of the
+      AI bot policy across the portfolio on a recurring cadence; flag
+      changes to inform internal AI-access agreements.
