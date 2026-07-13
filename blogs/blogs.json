@@ -2,11 +2,10 @@
   "repo": "meredith",
   "feeds": [
     {
-      "source": "https://www.people.inc/news-awards",
-      "saved": 0,
-      "error": "HTTP 402 Payment Required"
+      "source": "https://www.iac.com/brands/peopleinc",
+      "error": "TimeoutError"
     }
   ],
-  "fetched": "2026-06-27T12:54:37Z",
+  "fetched": "2026-07-11T11:50:51Z",
   "post_count": 0
 }
