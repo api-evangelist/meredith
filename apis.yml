@@ -19,6 +19,18 @@ description: |
 url: https://raw.githubusercontent.com/api-evangelist/meredith/main/apis.yml
 humanURL: https://www.people.inc/
 baseURL: https://www.people.inc/
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
 image: https://avatars.githubusercontent.com/u/46611466?v=4
 tags:
   - Media
