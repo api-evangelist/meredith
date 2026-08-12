@@ -1,3 +1,8 @@
+generated: '2026-08-12'
+method: searched
+source: https://www.people.inc/advertising and the HTTP 402 licensing response observed across the estate
+plan_count: 8
+self_serve_plan_count: 0
 name: People Inc / Dotdash Meredith Commercial Plans
 description: |
   People Inc has no public developer-API plan surface. Its commercial offering
@@ -148,3 +153,61 @@ absences:
   - notFound: Free Developer Tier
     rationale: |
       No free tier exists. All commercial surfaces are RFQ.
+
+# ---------------------------------------------------------------------------
+# Added 2026-08-12 by the enrichment pipeline. Observed on the wire, not read
+# off a pricing page: the estate now answers declared AI crawlers with an
+# HTTP 402 Payment Required that names its own commercial remedy. That makes
+# content licensing the ONE People Inc commercial surface with a
+# machine-readable entry point, even though the price itself is still RFQ.
+# ---------------------------------------------------------------------------
+machineReadablePricingSignal:
+  present: true
+  mechanism: HTTP 402 Payment Required at the CDN edge
+  observedOn:
+    - url: https://www.people.inc/news-awards
+      status: 402
+    - url: https://people.com/
+      status: 402
+    - url: https://www.allrecipes.com/
+      status: 402
+    - url: https://www.investopedia.com/
+      status: 402
+  triggerUserAgent: ClaudeBot/1.0 (+https://www.anthropic.com/claude-bot)
+  body: |
+    Payment Required - If you wish to license content from People Inc, please contact contentlicensing@people.inc
+  priceDisclosed: false
+  note: |
+    A named counterparty and a status code an agent can branch on, but no
+    rate card, no per-token or per-crawl price, and no self-serve checkout.
+    The signal says "this is purchasable"; it does not say what it costs.
+  crossRef: agentic-access/meredith-agentic-access.yml
+
+additionalPlans:
+  - id: ai-content-licensing
+    name: AI / Model Content Licensing
+    surface: Direct Licensing
+    selfServe: false
+    pricingModel: rfq
+    pricing:
+      type: Custom
+      currency: USD
+      notes: |
+        Not published. People Inc has disclosed AI content-licensing
+        arrangements publicly (its OpenAI partnership is the one reported in
+        the trade press and is visible in robots.txt, where the OpenAI
+        crawlers alone are exempted from the blanket AI denylist and are
+        restricted only from /thmb/). Terms and consideration are not
+        disclosed on any People Inc page.
+    contact: contentlicensing@people.inc
+    entryPoints:
+      - the HTTP 402 response body
+      - the robots.txt comment header on every brand domain
+    terms: https://www.people.inc/brands-termsofservice
+    evidence:
+      - url: https://people.com/robots.txt
+        status: 200
+        detail: |
+          GPTBot, OAI-SearchBot and ChatGPT-User carry only "Disallow: /thmb/",
+          while Google-Extended, anthropic-ai, ClaudeBot, CCBot, cohere-ai,
+          Meta-ExternalAgent and PerplexityBot carry "Disallow: /".

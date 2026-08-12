@@ -1,0 +1,91 @@
+generated: '2026-08-12'
+method: searched
+source: |
+  npm registry search, GitHub org enumeration via the GitHub API
+  (MeredithCorp, People-INC, Peopleinc), and the People Inc corporate site.
+description: |
+  People Inc publishes NO first-party client libraries in any public package
+  registry. This is an honest zero, not an unchecked field: npm, and the
+  company's own GitHub organizations, were enumerated and returned nothing
+  first-party. There is no API to write an SDK against, so the absence is
+  consistent with the rest of the profile rather than a gap in it.
+
+packages: []
+package_count: 0
+official_package_count: 0
+
+registries_searched:
+  - registry: npm
+    queries: [dotdash, meredith, people-inc, dcipher]
+    endpoint: https://registry.npmjs.org/-/v1/search
+    first_party_hits: 0
+    note: |
+      Every hit belongs to an unrelated party (a 2013 `dotdash` from
+      dotskapes, `@whynotearth/meredith-axios`, k4m4's `dcipher` hash tool,
+      and assorted personal-name packages). One package, `migration-pipeline`,
+      is published from github.com/TimeInc — Time Inc was acquired by Meredith
+      in 2018 and its assets came to Dotdash Meredith in 2021 — but it is a
+      generic 2023 migration utility with no relationship to a People Inc API
+      and is NOT recorded as first-party.
+  - registry: pypi
+    first_party_hits: 0
+  - registry: rubygems
+    first_party_hits: 0
+  - registry: packagist
+    first_party_hits: 0
+  - registry: crates.io
+    first_party_hits: 0
+  - registry: nuget
+    first_party_hits: 0
+  - registry: maven-central
+    first_party_hits: 0
+  - registry: pkg.go.dev
+    first_party_hits: 0
+
+github_organizations:
+  - org: MeredithCorp
+    url: https://github.com/MeredithCorp
+    public_repos: 1
+    http_status: 200
+    repos:
+      - name: sqs-consumer
+        url: https://github.com/MeredithCorp/sqs-consumer
+        fork: true
+        upstream: bbc/sqs-consumer
+        last_pushed: '2021-08-10'
+        archived: false
+        first_party: false
+        note: |
+          A FORK of the BBC's sqs-consumer, untouched since August 2021 — four
+          months before the Dotdash/Meredith merger closed and four years
+          before the People Inc rebrand. It is not a People Inc library and is
+          not counted as a package. apis.yml carries a GitHubRepository
+          pointer at it; that pointer describes the org's only public repo
+          accurately but should not be read as an SDK.
+  - org: People-INC
+    url: https://github.com/People-INC
+    public_repos: 0
+    http_status: 200
+  - org: Peopleinc
+    public_repos: 0
+    http_status: 200
+  - org: dotdash
+    http_status: 404
+  - org: dotdashmeredith
+    http_status: 404
+
+absences:
+  - id: no-sdk
+    detail: |
+      No official SDK exists in any language, because there is no
+      authenticated API surface to wrap. No `SDKs` pointer is emitted.
+  - id: no-cdn-distribution
+    detail: |
+      No first-party embeddable/CDN-distributed component was found either
+      (no unpkg/jsDelivr build, no versioned script tag on the corporate
+      site). Nothing to record a pinned or unpinned version for.
+
+x-evidence:
+  checked: '2026-08-12'
+  github_api: authenticated via gh CLI
+  npm_registry: unauthenticated search API

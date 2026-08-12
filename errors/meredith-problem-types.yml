@@ -1,0 +1,154 @@
+generated: '2026-08-12'
+method: probed
+source: live HTTP probes of people.inc and the brand estate, 2026-08-12
+description: |
+  People Inc publishes no OpenAPI, so there are no 4xx/5xx response objects to
+  derive an error catalog from. This catalog is instead built from the status
+  codes the estate ACTUALLY RETURNS to machine clients, observed directly.
+  Every entry below was reproduced on the wire; none is inferred from docs.
+
+  There is no error envelope. Nothing in the estate returns
+  application/problem+json, application/json, or any structured error body.
+  Refusals are either plain text (402) or a large HTML interstitial (403).
+
+format: none
+problem_json: false
+rfc9457: false
+envelope:
+  present: false
+  note: |
+    An agent gets a bare status code plus either a one-line text/plain string
+    or ~680KB of HTML. There is no machine-parseable error type, title,
+    detail, instance, or correlation identifier — no request-id header of any
+    kind was observed on a refusal.
+
+problems:
+
+  - status: 402
+    title: Payment Required
+    content_type: text/plain
+    body: |
+      Payment Required - If you wish to license content from People Inc, please contact contentlicensing@people.inc
+    trigger: |
+      A request identifying itself as a declared AI crawler (observed with
+      ClaudeBot) for any content path on a People Inc host.
+    remediation: |
+      Not retryable. Contact contentlicensing@people.inc to license the
+      corpus. The response names its own remedy, which is unusual and useful.
+    machine_actionable: true
+    observed_on:
+      - https://www.people.inc/news-awards
+      - https://people.com/
+      - https://www.allrecipes.com/
+      - https://www.investopedia.com/
+    note: |
+      The most informative error People Inc returns. It is a priced boundary
+      with a named counterparty, not an opaque denial.
+
+  - status: 403
+    title: Forbidden (Cloudflare bot-management interstitial)
+    content_type: text/html
+    body_bytes: 680204-680630
+    trigger: |
+      Any non-browser client requesting an HTML path — including a request
+      carrying a genuine desktop Chrome user-agent — and any request for a
+      path the edge does not explicitly allowlist.
+    remediation: |
+      Not remediable by a machine client. No retry-after, no challenge token,
+      no documented allowlisting path.
+    machine_actionable: false
+    observed_on:
+      - https://people.com/
+      - https://people.com/feed
+      - https://www.people.inc/news-awards
+      - https://www.people.inc/.well-known/openid-configuration
+      - https://www.allrecipes.com/feed
+      - https://www.investopedia.com/feeds/rss/articles
+    note: |
+      CRITICAL FOR ANY CONSUMER OF THIS PROFILE: a 403 here is NOT evidence
+      that a path is unimplemented. The same 403 is returned for a real
+      homepage and for a path that certainly does not exist, with a body of
+      the same order of magnitude. Absence and refusal are indistinguishable
+      from outside. Roughly 680KB of HTML is spent saying "no", which is
+      itself a cost imposed on every well-behaved client.
+
+  - status: 404
+    title: Not Found
+    content_type: text/html
+    body_bytes: 7677
+    trigger: /.well-known/security.txt on the corporate host www.people.inc
+    remediation: The document is served from the consumer brand domains instead.
+    machine_actionable: true
+    observed_on:
+      - https://www.people.inc/.well-known/security.txt
+    note: |
+      A genuine 404 with a small HTML body from the corporate app — visibly
+      different from the 403 interstitial, so on this host the two ARE
+      distinguishable.
+
+  - status: 460
+    title: Non-standard status returned to Googlebot
+    content_type: (empty)
+    body_bytes: 10
+    trigger: |
+      Any request to www.people.inc carrying the Googlebot user-agent string
+      from a non-Google IP address.
+    remediation: |
+      Not applicable — this is verified-bot enforcement. 460 is not an IANA
+      registered HTTP status code; it is Cloudflare-adjacent and undocumented.
+    machine_actionable: false
+    observed_on:
+      - https://www.people.inc/terms-of-service
+      - https://www.people.inc/brands-termsofservice
+      - https://www.people.inc/careers
+      - https://www.people.inc/definitely-not-real-xyz
+    note: |
+      Returned identically for real pages and for a deliberately fabricated
+      path, so it carries no existence information either. An unregistered
+      status code with a 10-byte body is the least legible response in the
+      estate.
+
+  - status: 200
+    title: Success (allowlisted machine paths only)
+    content_types: [text/plain, text/xml, application/xml]
+    trigger: robots.txt, sitemap.xml, google-news-sitemap.xml, /.well-known/security.txt
+    machine_actionable: true
+    observed_on:
+      - https://people.com/robots.txt
+      - https://people.com/sitemap.xml
+      - https://people.com/google-news-sitemap.xml
+      - https://people.com/.well-known/security.txt
+      - https://www.people.inc/sitemap.xml
+
+  - status: 200
+    title: SOFT-200 — HTML catch-all on the IAC parent host
+    content_type: text/html
+    body_bytes: 44481
+    trigger: any /.well-known/* path, /llms.txt, /openapi.json on www.iac.com
+    machine_actionable: false
+    false_positive_risk: high
+    note: |
+      Recorded explicitly as an ANTI-pattern. www.iac.com answers 200 with the
+      same Drupal page for every discovery path probed. A pipeline that trusts
+      status codes without inspecting bodies would credit IAC with an agent
+      card, an llms.txt, an OpenAPI and an api-catalog it does not serve. No
+      pointer was emitted from any of them.
+
+summary:
+  distinct_statuses_observed: 5
+  structured_error_bodies: 0
+  retry_signals_published: 0
+  correlation_id_headers: 0
+  registered_status_codes: 4
+  unregistered_status_codes: 1
+
+x-evidence:
+  fetched: '2026-08-12'
+  hosts_probed:
+    - www.people.inc
+    - people.com
+    - www.allrecipes.com
+    - www.investopedia.com
+    - www.bhg.com
+    - www.iac.com
+  credentials_used: none

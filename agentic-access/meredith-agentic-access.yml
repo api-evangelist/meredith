@@ -1,0 +1,243 @@
+generated: '2026-08-12'
+method: probed
+source: live HTTP probes of people.inc and the brand estate, 2026-08-12
+description: |
+  People Inc has no authenticated developer API, so its "agentic access"
+  contract is not an x-agentic-access block over OpenAPI operations — it is a
+  DENY-AND-PRICE policy enforced at the CDN edge over the whole content
+  estate. This artifact records that contract as it was actually observed on
+  the wire, not as it is described in marketing.
+
+  The headline finding: every People Inc host answers HTTP 402 Payment
+  Required — with a licensing contact in the body — to a request that
+  identifies itself as ClaudeBot. This is a machine-readable commercial
+  signal, and it is the single clearest statement of the company's agent
+  posture anywhere on its public surface.
+
+posture:
+  stance: deny-then-license
+  enforcement: edge
+  edge_vendor: Cloudflare
+  robots_policy: comprehensive-ai-denylist
+  paid_crawl_signal: true
+  licensing_contact: contentlicensing@people.inc
+  summary: |
+    Editorial content is closed to AI crawlers by robots.txt AND by an edge
+    rule that returns 402. Discovery metadata (robots.txt, sitemaps,
+    security.txt) stays open to everyone. Sponsored/branded content is
+    explicitly carved OUT of the AI denylist and left crawlable.
+
+observed_responses:
+
+  - probe: HTTP GET with User-Agent "ClaudeBot/1.0 (+https://www.anthropic.com/claude-bot)"
+    hosts:
+      - url: https://www.people.inc/news-awards
+        status: 402
+        content_type: text/plain
+        bytes: 109
+      - url: https://people.com/
+        status: 402
+        content_type: text/plain
+        bytes: 109
+      - url: https://www.allrecipes.com/
+        status: 402
+        content_type: text/plain
+        bytes: 109
+      - url: https://www.investopedia.com/
+        status: 402
+        content_type: text/plain
+        bytes: 109
+    body: |
+      Payment Required - If you wish to license content from People Inc, please contact contentlicensing@people.inc
+    response_headers_of_note:
+      server: cloudflare
+      cache-control: private, max-age=0, no-store, no-cache, must-revalidate
+      strict-transport-security: max-age=15552000
+    reading: |
+      402 is the correct and honest status for this: not "you are forbidden"
+      but "this costs money, here is who to ask". It is a priced boundary, and
+      an agent can act on it. Very few publishers in the catalog return 402 at
+      all; most return 403 or a soft-200 paywall shell that an agent cannot
+      distinguish from content.
+
+  - probe: HTTP GET with User-Agent "GPTBot/1.2"
+    hosts:
+      - url: https://www.people.inc/news-awards
+        status: 403
+        content_type: text/html
+        bytes: 680204
+    reading: |
+      DIFFERENT AGENTS GET DIFFERENT ANSWERS. GPTBot is refused with the
+      generic bot-management interstitial (403 + ~680KB of HTML), not the
+      402 licensing offer. Only the Anthropic crawler received the priced
+      response in this probe. Whether that reflects a per-vendor rule or a
+      different rule ordering is not determinable from outside; what is
+      recorded here is the observed divergence.
+
+  - probe: HTTP GET with a desktop Chrome user-agent over curl
+    hosts:
+      - url: https://www.people.inc/news-awards
+        status: 403
+        content_type: text/html
+        bytes: 680482
+      - url: https://people.com/
+        status: 403
+        content_type: text/html
+      - url: https://people.com/feed
+        status: 403
+        content_type: text/html
+    reading: |
+      A browser user-agent is NOT sufficient. The edge fingerprints the client
+      beyond the UA string, so every non-browser client is refused on HTML
+      paths regardless of what it claims to be. This is why the RSS feed
+      endpoints recorded in apis.yml cannot be verified from a script.
+
+  - probe: allowlisted machine paths, any user-agent including ClaudeBot
+    hosts:
+      - url: https://people.com/robots.txt
+        status: 200
+        content_type: text/plain
+      - url: https://people.com/sitemap.xml
+        status: 200
+        content_type: text/xml
+      - url: https://people.com/google-news-sitemap.xml
+        status: 200
+        content_type: text/xml
+      - url: https://people.com/.well-known/security.txt
+        status: 200
+        content_type: text/plain
+    reading: |
+      The discovery layer is deliberately left open to everyone, including the
+      crawlers the same edge charges for content. People Inc is closing the
+      corpus, not the map.
+
+robots_policy:
+  source: https://people.com/robots.txt
+  status: 200
+  fetched: '2026-08-12'
+  user_agent_directives: 78
+  license_notice_in_comments: true
+  license_notice: |
+    People Inc. content is made available for your non-commercial use subject
+    to Terms of Use at https://www.people.inc/brands-termsofservice. Use of
+    any crawler to data mine or scrape for any purpose other than directing
+    traffic or serving authorized advertisements is prohibited without prior
+    written permission. Prohibited uses expressly include: (1) text and data
+    mining under Art. 4 of the EU Directive on Copyright in the Digital Single
+    Market; (2) development or operation of any AI, ML, or LLM technology,
+    including training, fine-tuning, or retrieval-augmented generation; and
+    (3) creating data sets containing People Inc. content or sharing it.
+    Contact contentlicensing@people.inc.
+  legal_hooks:
+    - EU DSM Directive Art. 4 TDM reservation (machine-readable opt-out)
+    - explicit RAG prohibition
+    - explicit dataset-creation prohibition
+  fully_denied_examples:
+    - Google-Extended
+    - anthropic-ai
+    - Claude-SearchBot
+    - ClaudeBot
+    - Claude-User
+    - Claude-Web
+    - CCBot
+    - cohere-ai
+    - cohere-training-data-crawler
+    - Meta-ExternalAgent
+    - Meta-ExternalFetcher
+    - meta-webindexer
+    - PerplexityBot
+    - Perplexity-User
+    - Bytespider
+    - Applebot-Extended
+    - Amazonbot
+    - AmazonBuyForMe
+    - Amzn-SearchBot
+    - MistralAI-Index
+    - MistralAI-user
+    - DuckAssistBot
+    - Google-CloudVertexBot
+    - FirecrawlAgent
+    - ImagesiftBot
+    - Kagibot
+    - YouBot
+    - iAskBot
+    - Quora-Bot
+    - Webzio-Extended
+  partial_allow:
+    - user_agents: [GPTBot, OAI-SearchBot, ChatGPT-User]
+      rule: 'Disallow: /thmb/'
+      reading: |
+        The OpenAI crawlers are the ONE family not blanket-denied in
+        robots.txt — only the /thmb/ image-thumbnail path is disallowed.
+        People Inc has a commercial relationship with OpenAI; this asymmetry
+        is the robots.txt expression of it.
+    - user_agents: [Pinterest, Pinterestbot]
+      rule: 'Disallow: (empty value — full allow)'
+    - user_agents: [AmazonAdBot]
+      rule: 'Allow: /'
+  sponsored_content_carve_out:
+    rule: |
+      Under the block that denies Google-Extended, anthropic-ai, CCBot,
+      Claude-SearchBot, cohere-ai, Meta-ExternalAgent, meta-webindexer and
+      PerplexityBot with "Disallow: /", two Allow lines reopen specific paths:
+        Allow: */presented/
+        Allow: */integrated/
+    reading: |
+      SPONSORED AND BRANDED CONTENT IS EXEMPTED FROM THE AI BLOCK. The paths
+      People Inc keeps open to the AI crawlers it otherwise denies are the
+      paths that carry advertiser-paid content. Editorial is withheld;
+      advertising is offered. This is the clearest instance of agent-facing
+      commercial asymmetry in the media segment of the catalog and it is
+      stated in the provider's own published file, not inferred.
+
+corporate_host_policy:
+  source: https://www.people.inc/robots.txt
+  status: 200
+  fetched: '2026-08-12'
+  note: |
+    The corporate host runs a SEPARATE, differently-authored robots.txt with
+    section-header comments ("AI TRAINING & CONTENT SCRAPING BOTS - BLOCKED").
+    It includes two wildcard user-agent patterns — "User-agent: *Claude*" and
+    "User-agent: *AI*" — which are NOT valid Robots Exclusion Protocol; RFC
+    9309 user-agent matching is a prefix match on a token, with no glob
+    support. Those two groups match nothing and enforce nothing. The 402 edge
+    rule is what actually holds this host closed.
+  invalid_directives:
+    - directive: 'User-agent: *Claude*'
+      reason: RFC 9309 does not support glob patterns in user-agent tokens.
+    - directive: 'User-agent: *AI*'
+      reason: RFC 9309 does not support glob patterns in user-agent tokens.
+
+consent_signals:
+  aipref: false
+  content_signals: false
+  tdm_reservation_protocol: false
+  web_bot_auth: false
+  http_message_signatures: false
+  robots_txt_tdm_reservation: true
+  note: |
+    The TDM opt-out is asserted in robots.txt PROSE (a comment block naming
+    EU DSM Art. 4), not in any of the machine-parseable consent standards.
+    No /.well-known/ consent document, no Content-Signal header, no AIPREF
+    vocabulary. An agent must read English to learn the policy, or read a 402.
+
+agent_readiness_reading:
+  callable_surface: false
+  priced_refusal: true
+  discovery_open: true
+  summary: |
+    There is nothing here for an agent to CALL. What there is, is unusually
+    well-formed refusal: a documented denylist, a priced 402 with a named
+    counterparty, and an open discovery layer. For a publisher that is a
+    coherent posture, and it is more legible to an agent than most publishers
+    who simply return 403 or a soft-200 paywall shell.
+
+x-evidence:
+  fetched: '2026-08-12'
+  method: curl with varied User-Agent strings; no credentials used
+  user_agents_tested:
+    - ClaudeBot/1.0 (+https://www.anthropic.com/claude-bot)
+    - GPTBot/1.2
+    - Mozilla/5.0 ... Chrome/124.0 Safari/537.36
+    - curl/8.7.1
+    - Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)

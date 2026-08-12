@@ -1,0 +1,185 @@
+generated: '2026-08-12'
+method: probed
+source: |
+  Live probes of the People Inc estate (robots.txt, sitemap.xml,
+  google-news-sitemap.xml, /.well-known/security.txt) plus the artifacts
+  already in this repo.
+description: |
+  Standards conformance for a publisher with no developer API. The relevant
+  standards are not OAuth/OIDC/FAPI/FHIR — they are the WEB DISCOVERY and
+  CONTENT-CONSENT standards that govern machine access to a content estate.
+  Each entry below was checked against a document actually fetched at HTTP
+  200, or recorded as not-conformant with the reason.
+
+standards:
+
+  - id: rfc9309-robots-exclusion-protocol
+    name: RFC 9309 Robots Exclusion Protocol
+    conforms: true
+    evidence: |
+      https://people.com/robots.txt returns 200 text/plain with well-formed
+      User-agent / Disallow / Allow / Sitemap records; 78 user-agent
+      directives across the file.
+    caveat: |
+      The SEPARATE corporate robots.txt at https://www.people.inc/robots.txt
+      contains two invalid glob user-agent tokens ("User-agent: *Claude*" and
+      "User-agent: *AI*"). RFC 9309 §2.2.1 specifies prefix matching on a
+      product token with no wildcard support, so those two groups are inert.
+      The corporate host is therefore partially non-conformant.
+
+  - id: sitemaps-org-0.9
+    name: sitemaps.org Sitemap Protocol 0.9
+    conforms: true
+    evidence: |
+      https://people.com/sitemap.xml returns 200 text/xml, a valid
+      <sitemapindex> in the sitemaps.org/schemas/sitemap/0.9 namespace with 26
+      children carrying <loc> and <lastmod>. https://www.allrecipes.com/sitemap.xml
+      returns a 4-child index. https://www.people.inc/sitemap.xml returns a
+      34-URL <urlset> with <lastmod>, <changefreq> and <priority>.
+    note: 'Declared from robots.txt via Sitemap: directives, as the protocol expects.'
+
+  - id: google-news-sitemap
+    name: Google News Sitemap extension
+    conforms: true
+    evidence: |
+      https://people.com/google-news-sitemap.xml returns 200 text/xml,
+      84,906 bytes, a <urlset> carrying the Google News namespace extension.
+      Declared in robots.txt alongside the primary sitemap.
+
+  - id: rfc9116-security-txt
+    name: RFC 9116 security.txt
+    conforms: false
+    partial: true
+    evidence: |
+      Served at 200 text/plain from the brand domains with valid Contact,
+      Policy and Preferred-Languages fields.
+    deviations:
+      - Expires is REQUIRED by RFC 9116 §2.5.5 and is absent.
+      - The Policy URI returns 404 to anonymous clients (private program).
+      - No Canonical field; not OpenPGP-signed.
+      - Not served from the corporate host www.people.inc (404 there).
+    detail: security/meredith-vulnerability-disclosure.yml
+
+  - id: rss-2.0
+    name: RSS 2.0
+    conforms: unverified
+    evidence: |
+      Cannot be determined. Every feed URL recorded in apis.yml
+      (people.com/feed, allrecipes.com/feed, investopedia.com/feeds/rss/articles,
+      ew.com/feed and the rest) returns HTTP 403 with a Cloudflare
+      bot-management HTML interstitial to every non-browser client tested,
+      including one carrying a genuine desktop Chrome user-agent. The same 403
+      is returned for the brand homepages, so it is a client-fingerprint
+      refusal and NOT evidence that the feeds are absent or malformed.
+    note: |
+      Recorded as unverified rather than false. Claiming non-conformance from
+      a refusal we could not get past would be asserting a finding we did not
+      observe. json-schema/rss-feed-schema.json in this repo describes the
+      expected shape from an earlier round.
+
+  - id: schema-org-structured-data
+    name: schema.org / JSON-LD structured data
+    conforms: unverified
+    evidence: |
+      Article pages could not be fetched by any machine client (403), so the
+      embedded JSON-LD could not be inspected this round. json-ld/meredith-context.jsonld
+      in this repo is an API Evangelist-authored context, not a harvest of
+      theirs.
+
+  - id: aipref
+    name: IETF AIPREF machine-readable AI usage preferences
+    conforms: false
+    evidence: No /.well-known/ AIPREF document and no AIPREF vocabulary in robots.txt.
+
+  - id: content-signals
+    name: Content Signals Policy (robots.txt Content-Signal directive)
+    conforms: false
+    evidence: |
+      grep of https://people.com/robots.txt for "content-signal" returns
+      nothing, despite the estate running on Cloudflare, which authors that
+      proposal.
+
+  - id: tdm-reservation-protocol
+    name: W3C TDM Reservation Protocol (tdmrep)
+    conforms: false
+    evidence: |
+      No /.well-known/tdmrep.json. The EU DSM Art. 4 text-and-data-mining
+      reservation IS asserted — but in PROSE, inside a robots.txt comment
+      block, which no parser reads.
+
+  - id: web-bot-auth
+    name: Web Bot Auth / HTTP Message Signatures for agent identity
+    conforms: false
+    evidence: |
+      No signature-based bot verification is offered; the estate discriminates
+      on user-agent string and TLS fingerprint only, which is why an
+      unverified Googlebot string draws a non-standard 460.
+
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: No endpoint returns application/problem+json. See errors/meredith-problem-types.yml.
+
+  - id: oauth2
+    conforms: false
+    evidence: No OAuth surface; no /.well-known/oauth-authorization-server (403/absent).
+
+  - id: openid-connect
+    conforms: false
+    evidence: No /.well-known/openid-configuration served.
+
+  - id: openapi
+    conforms: false
+    evidence: |
+      No OpenAPI/Swagger document found. Probed /openapi.json, /openapi.yaml,
+      /swagger.json, /api-docs, /docs and /v1/openapi.json against
+      www.people.inc, people.com, www.allrecipes.com, www.investopedia.com,
+      www.bhg.com and www.iac.com. All 403 or soft-200 HTML. No api.* or
+      developer.* subdomain resolves in DNS for people.inc or people.com.
+
+  - id: asyncapi
+    conforms: false
+    evidence: No event, streaming, or webhook surface is published.
+
+  - id: mcp
+    conforms: false
+    evidence: No hosted MCP server found; nothing in any MCP registry.
+
+  - id: a2a
+    conforms: false
+    evidence: |
+      /.well-known/agent-card.json and /.well-known/agent.json probed on all
+      six hosts. Nothing but 403s and, on www.iac.com, an HTML soft-200 that
+      was rejected. No agent card exists and none was authored.
+
+compliance_program:
+  published: partial
+  detail: |
+    People Inc does not operate a trust centre and publishes no security
+    certification (no SOC 2, ISO 27001, PCI DSS, HIPAA or FedRAMP attestation
+    was found; trust.people.inc, security.people.inc and status.people.inc do
+    not resolve in DNS). What it does publish is CORPORATE governance
+    documentation inherited from its IAC parent — the IAC Code of Business
+    Conduct and Ethics and a UK/Canada forced-labour report — plus a privacy
+    policy and brand terms of service. apis.yml already carries a Compliance
+    pointer at the code of conduct; no new one is emitted, and no security
+    certification is claimed.
+  certifications: []
+  trust_center: false
+
+summary:
+  standards_checked: 17
+  conforms: 3
+  partial: 1
+  unverified: 2
+  does_not_conform: 11
+
+x-evidence:
+  checked: '2026-08-12'
+  documents_fetched_200:
+    - https://people.com/robots.txt
+    - https://www.people.inc/robots.txt
+    - https://people.com/sitemap.xml
+    - https://www.allrecipes.com/sitemap.xml
+    - https://www.people.inc/sitemap.xml
+    - https://people.com/google-news-sitemap.xml
+    - https://people.com/.well-known/security.txt

@@ -1,0 +1,163 @@
+generated: '2026-08-12'
+method: probed
+source: |
+  Live probes of the People Inc estate 2026-08-12, plus robots.txt,
+  sitemap.xml and /.well-known/security.txt fetched at HTTP 200.
+description: |
+  Cross-cutting runtime semantics for machine consumers of the People Inc
+  estate. There is no authenticated API, so this document does not describe
+  request signing, idempotency keys, or pagination cursors — it describes the
+  conventions that actually govern a machine client here: how you are
+  identified, how you are refused, what is left open to you, and where the
+  discovery surface lives.
+
+  Read alongside errors/meredith-problem-types.yml (what refusals look like),
+  agentic-access/meredith-agentic-access.yml (the AI-crawler policy) and
+  conformance/meredith-conformance.yml (which standards hold).
+
+authentication:
+  style: none
+  detail: |
+    No API keys, no OAuth, no bearer tokens, no signed requests. There is no
+    credential a machine client can present to gain access, which also means
+    there is no path from "refused" to "allowed" other than a commercial
+    licensing conversation. See the 402 body: contentlicensing@people.inc.
+  scopes: none
+  cross_ref: null
+
+client_identification:
+  primary: User-Agent string
+  secondary: TLS/client fingerprint at the Cloudflare edge
+  detail: |
+    Access is decided on WHO YOU SAY YOU ARE plus WHAT YOUR CLIENT LOOKS LIKE,
+    and the second signal dominates. Sending a real desktop Chrome user-agent
+    from curl does not get an HTML page — it gets the same 403 interstitial as
+    curl's default. Declared AI crawler tokens are routed to a different rule
+    that returns 402 (observed with ClaudeBot).
+  verified_bot_handling: |
+    A Googlebot user-agent from a non-Google IP draws HTTP 460, an
+    unregistered status code with a 10-byte body, on the corporate host.
+
+idempotency:
+  supported: false
+  header: null
+  detail: |
+    Not applicable and not claimed. Nothing in the estate accepts a write.
+    All observed methods are read-only GETs of static or cached documents,
+    which are idempotent by HTTP semantics, but no Idempotency-Key convention
+    is offered or needed. NO `Idempotency` pointer is emitted in apis.yml —
+    asserting one would credit People Inc with a runtime guarantee it neither
+    publishes nor requires.
+
+pagination:
+  style: sitemap-index
+  detail: |
+    The only paging construct in the estate is the sitemap index: a
+    <sitemapindex> at /sitemap.xml enumerating N child <sitemap> documents,
+    each a <urlset>. people.com publishes 26 children; www.allrecipes.com
+    publishes 4. There are no cursors, no page/limit parameters, no Link
+    rel=next headers.
+  params: []
+  response_fields: [loc, lastmod, changefreq, priority]
+
+versioning:
+  scheme: none
+  detail: |
+    No API version exists to negotiate. Content versioning is editorial —
+    articles carry updated dates in the page body — and sitemap <lastmod>
+    is the only machine-readable freshness signal, refreshed daily (all
+    people.com children showed lastmod 2026-08-12 on the day of probe).
+
+freshness_signals:
+  - signal: sitemap <lastmod>
+    granularity: date
+    reliability: high
+    note: The single best change-detection primitive available here.
+  - signal: google-news-sitemap.xml
+    granularity: recent-news window
+    reliability: high
+    note: 84,906 bytes of recently-published URLs, refreshed continuously.
+  - signal: RSS feeds
+    reliability: unverified
+    note: |
+      Feed URLs are recorded in apis.yml but return 403 to every machine
+      client tested. Cannot be relied on programmatically.
+
+error_envelope:
+  shape: none
+  content_types_on_error: [text/plain, text/html]
+  structured: false
+  cross_ref: errors/meredith-problem-types.yml
+  detail: |
+    A 402 returns a single line of text/plain naming the licensing contact —
+    genuinely actionable. A 403 returns roughly 680KB of HTML that says
+    nothing a parser can use, and is returned identically for real paths and
+    fabricated ones, so refusal and absence cannot be told apart.
+
+rate_limit_signaling:
+  headers_published: false
+  observed_headers: []
+  detail: |
+    No X-RateLimit-*, no RateLimit-*, no Retry-After was observed on any
+    response, including the 402 and 403 refusals. Shaping happens at the edge
+    with no published budget and no runtime signal, so a client cannot pace
+    itself or back off intelligently — it can only fail.
+  cross_ref: rate-limits/meredith-rate-limits.yml
+
+caching:
+  observed:
+    - path_class: allowlisted machine documents
+      cf_cache_status: DYNAMIC
+      note: security.txt observed with cf-cache-status DYNAMIC.
+    - path_class: 402 refusal
+      cache_control: 'private, max-age=0, no-store, no-cache, must-revalidate'
+      note: |
+        The licensing refusal is explicitly uncacheable, so a client that hits
+        it pays the round trip every time.
+  conditional_requests: not_advertised
+  detail: No ETag or Last-Modified was surfaced on the documents probed.
+
+transport:
+  https_only: true
+  http_versions: [HTTP/2, HTTP/3 via alt-svc h3]
+  hsts: true
+  hsts_max_age: 15552000
+  cdn: Cloudflare
+  cross_ref: security/meredith-domain-security.yml
+
+open_surface:
+  detail: |
+    The convention worth stating plainly: DISCOVERY IS OPEN, CONTENT IS NOT.
+    robots.txt, sitemap.xml, google-news-sitemap.xml and
+    /.well-known/security.txt are served at 200 to every client tested,
+    including the AI crawlers the same edge charges 402 for content. A machine
+    consumer can build a complete, current URL inventory of the estate without
+    being able to fetch a single article.
+  paths:
+    - /robots.txt
+    - /sitemap.xml
+    - /google-news-sitemap.xml
+    - /.well-known/security.txt
+
+licensing_path:
+  contact: contentlicensing@people.inc
+  published_in:
+    - the HTTP 402 response body
+    - the robots.txt comment header
+  terms: https://www.people.inc/brands-termsofservice
+  detail: |
+    Both published statements of the licensing route agree on the same
+    address, which is more consistency than most publishers manage. Note it
+    is @people.inc, whereas the departmental addresses in apis.yml
+    (advertising@, licensing@, press@) are @peopleinc.com.
+
+x-evidence:
+  checked: '2026-08-12'
+  documents_fetched_200:
+    - https://people.com/robots.txt
+    - https://people.com/sitemap.xml
+    - https://people.com/google-news-sitemap.xml
+    - https://people.com/.well-known/security.txt
+    - https://www.people.inc/sitemap.xml
+    - https://www.people.inc/robots.txt
+  refusals_observed: [402, 403, 404, 460]

@@ -1,0 +1,202 @@
+generated: '2026-08-12'
+method: searched
+source: https://people.com/.well-known/security.txt
+description: |
+  /.well-known/ discovery probe across the People Inc (formerly Dotdash
+  Meredith) brand estate and the corporate people.inc host. One real document
+  is served: an RFC 9116 security.txt, byte-identical across every brand
+  domain, pointing at a PRIVATE HackerOne program. No OAuth/OIDC discovery,
+  no api-catalog, no ai-plugin.json, no A2A agent card is published anywhere
+  in the estate — expected, because People Inc runs no authenticated
+  developer API.
+
+  IMPORTANT READING NOTE ON THE NON-200 STATUSES BELOW. The People Inc edge
+  is Cloudflare with bot management in enforcement mode. Requests for paths
+  the edge does not explicitly allowlist are answered 403 with a ~680KB
+  interstitial HTML body for EVERY non-browser client, including a real
+  Chrome user-agent over curl. A 403 here is therefore NOT proof that the
+  path is unimplemented — it is the edge refusing to answer. Only /robots.txt,
+  /sitemap.xml, /google-news-sitemap.xml and /.well-known/security.txt are
+  served to machine clients. The corporate host additionally answers HTTP
+  402 Payment Required to declared AI crawlers (see
+  agentic-access/meredith-agentic-access.yml).
+
+hosts:
+
+  - host: people.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        content_type: text/plain
+        bytes: 292
+        file: meredith-security.txt
+        real_document: true
+      - path: /.well-known/openid-configuration
+        status: 403
+        real_document: false
+        note: Cloudflare bot-management interstitial (HTML), not a 404.
+      - path: /.well-known/oauth-authorization-server
+        status: 403
+        real_document: false
+        note: Cloudflare bot-management interstitial (HTML), not a 404.
+      - path: /.well-known/api-catalog
+        status: 403
+        real_document: false
+        note: Cloudflare bot-management interstitial (HTML), not a 404.
+      - path: /.well-known/ai-plugin.json
+        status: 403
+        real_document: false
+      - path: /.well-known/agent-card.json
+        status: 403
+        real_document: false
+      - path: /.well-known/agent.json
+        status: 403
+        real_document: false
+      - path: /llms.txt
+        status: 403
+        real_document: false
+
+  - host: www.allrecipes.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        content_type: text/plain
+        bytes: 292
+        real_document: true
+        note: Byte-identical to the people.com copy; stored once as meredith-security.txt.
+      - path: /.well-known/agent-card.json
+        status: 403
+        real_document: false
+      - path: /.well-known/agent.json
+        status: 403
+        real_document: false
+      - path: /llms.txt
+        status: 403
+        real_document: false
+
+  - host: www.investopedia.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        content_type: text/plain
+        bytes: 292
+        real_document: true
+      - path: /.well-known/agent-card.json
+        status: 403
+        real_document: false
+      - path: /llms.txt
+        status: 403
+        real_document: false
+
+  - host: www.bhg.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        content_type: text/plain
+        bytes: 292
+        real_document: true
+      - path: /.well-known/agent-card.json
+        status: 403
+        real_document: false
+      - path: /llms.txt
+        status: 403
+        real_document: false
+
+  - host: www.people.inc
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        real_document: false
+        note: |
+          The CORPORATE host does not serve security.txt — only the consumer
+          brand domains do. A reader looking for People Inc's disclosure
+          policy at the company's own domain will not find it.
+      - path: /.well-known/agent-card.json
+        status: 403
+        real_document: false
+      - path: /.well-known/agent.json
+        status: 403
+        real_document: false
+      - path: /llms.txt
+        status: 403
+        real_document: false
+      - path: /openapi.json
+        status: 403
+        real_document: false
+      - path: /swagger.json
+        status: 403
+        real_document: false
+      - path: /api-docs
+        status: 403
+        real_document: false
+
+  - host: www.iac.com
+    note: |
+      REJECTED AS SOFT-200. Every /.well-known/* path on the IAC parent-company
+      host answers HTTP 200 with the SAME 44,481-byte Drupal HTML page,
+      including /.well-known/agent-card.json, /.well-known/agent.json,
+      /llms.txt, /openapi.json and /api-catalog. This is an SPA/CMS catch-all,
+      not a served discovery document. No pointer is emitted from any of these
+      and no agent card is recorded — a 200 that returns HTML is a miss.
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        content_type: text/html
+        bytes: 44481
+        real_document: false
+      - path: /.well-known/agent-card.json
+        status: 200
+        content_type: text/html
+        bytes: 44481
+        real_document: false
+      - path: /.well-known/agent.json
+        status: 200
+        content_type: text/html
+        bytes: 44481
+        real_document: false
+      - path: /llms.txt
+        status: 200
+        content_type: text/html
+        bytes: 44481
+        real_document: false
+
+summary:
+  real_documents: 1
+  document_types:
+    - RFC 9116 security.txt
+  agent_card_found: false
+  oauth_discovery_found: false
+  api_catalog_found: false
+  llms_txt_found: false
+
+other_machine_readable_surface:
+  note: |
+    Not under /.well-known/, but these ARE served to machine clients at 200
+    and are the only reliably reachable structured surface in the estate.
+  documents:
+    - url: https://people.com/robots.txt
+      status: 200
+      content_type: text/plain
+      format: RFC 9309 Robots Exclusion Protocol
+    - url: https://people.com/sitemap.xml
+      status: 200
+      content_type: text/xml
+      format: sitemaps.org 0.9 sitemapindex (26 child sitemaps)
+    - url: https://people.com/google-news-sitemap.xml
+      status: 200
+      content_type: text/xml
+      bytes: 84906
+      format: sitemaps.org 0.9 urlset with the Google News extension
+    - url: https://www.allrecipes.com/sitemap.xml
+      status: 200
+      format: sitemaps.org 0.9 sitemapindex (4 child sitemaps)
+    - url: https://www.people.inc/sitemap.xml
+      status: 200
+      content_type: application/xml
+      format: sitemaps.org 0.9 urlset (34 corporate URLs)
+
+x-evidence:
+  checked: '2026-08-12'
+  probe_client: curl with a desktop Chrome user-agent
+  hosts_probed: 6
+  paths_probed_per_host: 11

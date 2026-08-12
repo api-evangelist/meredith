@@ -1,0 +1,106 @@
+generated: '2026-08-12'
+method: probed
+source: |
+  DNS resolution and HTTP probes for status/trust subdomains and policy pages,
+  plus the corporate sitemap at https://www.people.inc/sitemap.xml (200).
+description: |
+  Lifecycle posture for People Inc. There is no API to version, deprecate or
+  put behind an SLA, and the company publishes none of the operational
+  transparency surfaces the rating looks for. This file records those
+  absences with the probes that established them, so a reader can see they
+  were checked rather than skipped.
+
+versioning:
+  scheme: none
+  current: null
+  docs: null
+  detail: No API version namespace exists. See conventions/meredith-conventions.yml.
+
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  detail: |
+    No deprecation policy is published, and no Sunset or Deprecation response
+    header was observed on any probe. NO `Deprecation` pointer is emitted.
+  historical_note: |
+    Deprecation at People Inc happens at the BRAND level, not the endpoint
+    level, and it is not announced in any machine-readable form. Brands in the
+    portfolio have been folded or retired over the past several years
+    (MyRecipes, for instance, still has a corporate brand page at
+    https://www.people.inc/myrecipes listed in the sitemap). A consumer
+    tracking these feeds learns a brand is gone by getting a 404, not by
+    reading a notice.
+
+sla:
+  url: null
+  published: false
+  uptime_target: null
+  detail: No SLA is offered — there is no paid API tier to attach one to.
+
+status_page:
+  url: null
+  published: false
+  detail: |
+    No status page exists. DNS probes for status.people.inc, trust.people.inc
+    and security.people.inc all fail to resolve (NXDOMAIN). No third-party
+    status page (statuspage.io, status.io, instatus) was found for People Inc
+    or Dotdash Meredith. NO `StatusPage` pointer is emitted.
+  probes:
+    - host: status.people.inc
+      result: NXDOMAIN
+    - host: trust.people.inc
+      result: NXDOMAIN
+    - host: security.people.inc
+      result: NXDOMAIN
+
+changelog:
+  url: https://www.people.inc/news-awards
+  kind: corporate-press-releases
+  api_changelog: false
+  detail: |
+    apis.yml carries a ChangeLog pointer at the corporate news-and-awards
+    page. That page is a press-release and awards listing, NOT a product or
+    API changelog — it announces business news, not interface changes. The
+    pointer is left in place because it is the only dated update stream the
+    company publishes, but no separate changelog/ artifact is authored, and
+    a reader should not expect breaking-change notices there.
+  fetch_note: |
+    The page itself could not be read this round: it returns 403 to browser-UA
+    machine clients and 402 Payment Required to declared AI crawlers.
+
+deprecated_operations: []
+
+corporate_lifecycle:
+  note: |
+    The identity churn is itself a lifecycle hazard for anyone integrating.
+    About.com (1997) -> Dotdash (2017) -> Dotdash Meredith (Dec 2021, on the
+    $2.7B Meredith acquisition) -> People Inc (July 31, 2025). Artifacts still
+    on the wire lag the current name: the live security.txt says "Dotdash",
+    and dotdashmeredith.com 301s to www.people.inc. Any consumer hard-coding a
+    corporate domain has been broken at least twice.
+  redirect_chain_observed:
+    - from: https://dotdashmeredith.com/
+      status: 301
+      to: https://www.dotdashmeredith.com/
+    - from: https://www.dotdashmeredith.com/
+      status: 301
+      to: https://www.people.inc/
+
+x-evidence:
+  checked: '2026-08-12'
+  probes:
+    - url: https://www.people.inc/sitemap.xml
+      status: 200
+    - url: https://dotdashmeredith.com/
+      status: 301
+    - url: https://www.dotdashmeredith.com/
+      status: 301
+    - url: https://www.people.inc/news-awards
+      status: 403
+    - host: status.people.inc
+      status: NXDOMAIN
+    - host: trust.people.inc
+      status: NXDOMAIN

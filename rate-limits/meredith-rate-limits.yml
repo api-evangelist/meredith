@@ -1,3 +1,9 @@
+generated: '2026-08-12'
+method: probed
+source: live HTTP probes of the People Inc estate, 2026-08-12
+limit_count: 0
+published_numeric_limits: false
+rate_limit_headers_observed: []
 name: People Inc / Dotdash Meredith Rate Limits and Bot Policy
 description: |
   People Inc does not publish numerical rate limits because it does not run a
@@ -119,3 +125,83 @@ guidance:
       Use the ai-bot-policy-audit capability to capture a snapshot of the
       AI bot policy across the portfolio on a recurring cadence; flag
       changes to inform internal AI-access agreements.
+
+# ---------------------------------------------------------------------------
+# Added 2026-08-12 by the enrichment pipeline — direct observation, replacing
+# inference. IMPORTANT CORRECTION to the `rss-feed-shaping` policy above: the
+# claim that "requests with a realistic User-Agent at human-pace reliably
+# return RSS content" did NOT reproduce this round. Every feed URL in apis.yml
+# returned 403 to a single, un-bursted request carrying a genuine desktop
+# Chrome user-agent. The edge is fingerprinting the client below the UA layer,
+# so pace and UA are not sufficient.
+# ---------------------------------------------------------------------------
+observedEdgeBehavior:
+  probedOn: '2026-08-12'
+  publishedNumericLimits: 0
+  responseHeaders:
+    xRateLimit: absent
+    rateLimit: absent
+    retryAfter: absent
+    note: |
+      No rate-limit header of any form was returned on any response, including
+      refusals. A client cannot pace itself against a published budget or back
+      off on a signal; it can only fail and guess.
+  statusesReturned:
+    - status: 200
+      appliesTo: [/robots.txt, /sitemap.xml, /google-news-sitemap.xml, /.well-known/security.txt]
+      note: Allowlisted machine paths, served to every client tested including ClaudeBot.
+    - status: 402
+      appliesTo: [content paths]
+      trigger: declared AI crawler user-agent (observed with ClaudeBot)
+      cacheControl: 'private, max-age=0, no-store, no-cache, must-revalidate'
+      note: Uncacheable, so the round trip is paid on every attempt.
+    - status: 403
+      appliesTo: [content paths, RSS feed paths, unallowlisted /.well-known/* paths]
+      trigger: any non-browser client, including one sending a desktop Chrome UA
+      bodyBytes: 680204-680630
+      note: |
+        Roughly 680KB of HTML per refusal. Returned identically for real paths
+        and fabricated ones, so it carries no existence information.
+    - status: 460
+      appliesTo: [www.people.inc]
+      trigger: Googlebot user-agent from a non-Google IP
+      bodyBytes: 10
+      note: Unregistered HTTP status code; verified-bot enforcement.
+  feedReachability:
+    verdict: unreachable-by-machine-clients
+    probed:
+      - url: https://people.com/feed
+        status: 403
+      - url: https://people.com/feed/
+        status: 403
+      - url: https://people.com/rss
+        status: 403
+      - url: https://www.allrecipes.com/feed
+        status: 403
+      - url: https://www.investopedia.com/feeds/rss/articles
+        status: 403
+      - url: https://ew.com/feed
+        status: 403
+    caveat: |
+      The brand homepages return the same 403 to the same client, so this is a
+      client-fingerprint refusal and NOT proof the feeds are absent. Recorded
+      as unverified in conformance/meredith-conformance.yml rather than as a
+      finding that the feeds do not exist.
+  sitemapReachability:
+    verdict: reachable
+    probed:
+      - url: https://people.com/sitemap.xml
+        status: 200
+        detail: sitemapindex, 26 children, lastmod 2026-08-12
+      - url: https://people.com/google-news-sitemap.xml
+        status: 200
+        bytes: 84906
+      - url: https://www.allrecipes.com/sitemap.xml
+        status: 200
+        detail: sitemapindex, 4 children
+      - url: https://www.people.inc/sitemap.xml
+        status: 200
+        detail: urlset, 34 corporate URLs
+    recommendation: |
+      Sitemaps are the only dependable machine surface. Any recurring
+      integration should be built on sitemap <lastmod> polling, not on RSS.

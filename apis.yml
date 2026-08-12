@@ -13,9 +13,18 @@ description: |
   per-brand RSS feeds, XML sitemaps, robots.txt policy declarations, and the
   D/Cipher intent-based contextual advertising platform sold as a B2B media buy
   (no self-serve developer console). All major brand domains explicitly disallow
-  ClaudeBot, anthropic-ai, GPTBot (partial), CCBot, PerplexityBot, and other AI
-  crawlers in robots.txt, reflecting the company's stance on unlicensed model
-  training against its content corpus.
+  ClaudeBot, anthropic-ai, CCBot, PerplexityBot and 70+ other AI crawlers in
+  robots.txt — with the OpenAI crawlers (GPTBot, OAI-SearchBot, ChatGPT-User)
+  notably exempted down to a single /thmb/ path, and sponsored-content paths
+  (*/presented/, */integrated/) carved back OUT of the denylist so advertiser
+  content stays crawlable while editorial does not. The policy is enforced at
+  the Cloudflare edge as well as declared: as of 2026-08-12 every People Inc
+  host answers a declared AI crawler with HTTP 402 Payment Required and the
+  body "If you wish to license content from People Inc, please contact
+  contentlicensing@people.inc". Discovery metadata (robots.txt, sitemap.xml,
+  google-news-sitemap.xml and an RFC 9116 security.txt pointing at a private
+  HackerOne program) is served at 200 to every client; article and RSS paths
+  return 403 to every non-browser client. The map is open, the corpus is not.
 url: https://raw.githubusercontent.com/api-evangelist/meredith/main/apis.yml
 humanURL: https://www.people.inc/
 baseURL: https://www.people.inc/
@@ -47,7 +56,7 @@ tags:
   - AI Policy
   - IAC
 created: '2025-05-05'
-modified: '2026-05-23'
+modified: '2026-08-12'
 specificationVersion: '0.18'
 type: Index
 aid: meredith
@@ -512,6 +521,30 @@ apis:
 
 common:
 
+  - type: VulnerabilityDisclosure
+    url: security/meredith-vulnerability-disclosure.yml
+  - type: Security
+    url: security/meredith-vulnerability-disclosure.yml
+  - type: WellKnown
+    url: well-known/meredith-well-known.yml
+  - type: SecurityTxt
+    url: well-known/meredith-security.txt
+  - type: AgenticAccess
+    url: agentic-access/meredith-agentic-access.yml
+  - type: Conventions
+    url: conventions/meredith-conventions.yml
+  - type: Conformance
+    url: conformance/meredith-conformance.yml
+  - type: ErrorCatalog
+    url: errors/meredith-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/meredith-lifecycle.yml
+  - type: Packages
+    url: packages/meredith-packages.yml
+  - type: LLMsTxt
+    url: llms/meredith-llms.txt
+  - type: Vocabulary
+    url: vocabulary/meredith-vocabulary.yml
   - type: IssueTracker
     url: https://github.com/api-evangelist/meredith/issues
   - type: DomainSecurity
@@ -533,11 +566,15 @@ common:
   - type: LinkedIn
     url: https://www.linkedin.com/company/peopleinc-us/
   - type: TermsOfService
-    url: https://www.people.inc/terms-of-service
+    url: https://www.people.inc/brands-termsofservice
   - type: PrivacyPolicy
     url: https://www.people.inc/privacy-policy
   - type: Compliance
-    url: https://www.people.inc/iac-code-of-business-conduct-and-ethics
+    url: https://ir.iac.com/code-business-conduct-and-ethics
+  - type: Support
+    url: https://www.people.inc/contact
+  - type: Contact
+    url: mailto:contentlicensing@people.inc
   - type: Contact
     url: mailto:advertising@peopleinc.com
   - type: Contact
@@ -559,3 +596,9 @@ maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
     url: https://kinlane.com
+
+x-enrichment:
+  date: '2026-08-12'
+  status: enriched
+  artifacts_added: 10
+  pass: local-v1
