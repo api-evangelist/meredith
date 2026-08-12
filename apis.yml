@@ -512,6 +512,8 @@ apis:
 
 common:
 
+  - type: IssueTracker
+    url: https://github.com/api-evangelist/meredith/issues
   - type: DomainSecurity
     url: security/meredith-domain-security.yml
   - type: Portal
