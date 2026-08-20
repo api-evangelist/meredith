@@ -51,6 +51,20 @@ tags:
   - Lifestyle
   - News
   - RSS
+  - Sitemap
+  - Robots
+  - AI Policy
+  - IaC
+tags_raw:
+  - Media
+  - Publishing
+  - Magazines
+  - Content
+  - Advertising
+  - Contextual Advertising
+  - Lifestyle
+  - News
+  - RSS
   - Sitemaps
   - Robots
   - AI Policy
@@ -75,6 +89,11 @@ apis:
     baseURL: https://people.com/
     image: https://www.iac.com/sites/default/files/brand-logos/people-logo.png
     tags:
+      - People
+      - Celebrity
+      - Entertainment
+      - RSS
+    tags_raw:
       - PEOPLE
       - Celebrity
       - Entertainment
@@ -96,6 +115,11 @@ apis:
     humanURL: https://www.bhg.com/
     baseURL: https://www.bhg.com/
     tags:
+      - Better Homes And Gardens
+      - Homes
+      - Garden
+      - RSS
+    tags_raw:
       - Better Homes And Gardens
       - Home
       - Garden
@@ -181,6 +205,11 @@ apis:
     humanURL: https://www.realsimple.com/
     baseURL: https://www.realsimple.com/
     tags:
+      - Real Simple
+      - Homes
+      - Lifestyle
+      - RSS
+    tags_raw:
       - Real Simple
       - Home
       - Lifestyle
@@ -295,6 +324,12 @@ apis:
     humanURL: https://www.thespruce.com/
     baseURL: https://www.thespruce.com/
     tags:
+      - The Spruce
+      - Homes
+      - Pets
+      - Food
+      - RSS
+    tags_raw:
       - The Spruce
       - Home
       - Pets
@@ -427,6 +462,11 @@ apis:
     baseURL: https://www.marthastewart.com/
     tags:
       - Martha Stewart
+      - Homes
+      - Lifestyle
+      - RSS
+    tags_raw:
+      - Martha Stewart
       - Home
       - Lifestyle
       - RSS
@@ -456,6 +496,10 @@ apis:
     humanURL: https://www.allrecipes.com/sitemap.xml
     baseURL: https://www.allrecipes.com/sitemap.xml
     tags:
+      - Sitemap
+      - XML
+      - Discovery
+    tags_raw:
       - Sitemaps
       - XML
       - Discovery
@@ -511,6 +555,11 @@ apis:
     humanURL: https://www.people.inc/advertising
     baseURL: https://www.people.inc/advertising
     tags:
+      - Specialty Marketing Solutions
+      - Content Marketing
+      - Licensing
+      - Point of Care
+    tags_raw:
       - Specialty Marketing Solutions
       - Content Marketing
       - Licensing
