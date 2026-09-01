@@ -63,10 +63,10 @@ tags:
   - Lifestyle
   - News
   - RSS
-  - Sitemaps
+  - Sitemap
   - Robots
   - AI Policy
-  - IAC
+  - IaC
 tags_raw:
   - Media
   - Publishing
@@ -101,7 +101,7 @@ apis:
     baseURL: https://people.com/
     image: https://www.iac.com/sites/default/files/brand-logos/people-logo.png
     tags:
-      - PEOPLE
+      - People
       - Celebrity
       - Entertainment
       - RSS
@@ -508,7 +508,7 @@ apis:
     humanURL: https://www.allrecipes.com/sitemap.xml
     baseURL: https://www.allrecipes.com/sitemap.xml
     tags:
-      - Sitemaps
+      - Sitemap
       - XML
       - Discovery
     tags_raw:
@@ -570,7 +570,7 @@ apis:
       - Specialty Marketing Solutions
       - Content Marketing
       - Licensing
-      - Point Of Care
+      - Point of Care
     tags_raw:
       - Specialty Marketing Solutions
       - Content Marketing
