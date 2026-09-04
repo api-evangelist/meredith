@@ -87,8 +87,7 @@ specificationVersion: '0.23'
 type: Index
 aid: meredith
 access: 3rd-Party
-position: Consumer
-
+position: Consuming
 apis:
 
   - name: PEOPLE RSS Feeds
