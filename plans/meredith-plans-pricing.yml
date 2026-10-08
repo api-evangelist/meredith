@@ -211,3 +211,58 @@ additionalPlans:
           GPTBot, OAI-SearchBot and ChatGPT-User carry only "Disallow: /thmb/",
           while Google-Extended, anthropic-ai, ClaudeBot, CCBot, cohere-ai,
           Meta-ExternalAgent and PerplexityBot carry "Disallow: /".
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - negotiated
+  units: []
+  plans:
+  - name: D/Cipher Contextual Advertising
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Branded Content + Experiences
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Editorial Award Seal Licensing
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Brand Licensing
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Editorial Content Licensing
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Targeted Media Health (Point-of-Care)
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Media Now Interactive
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Consumer Magazine Subscriptions
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
