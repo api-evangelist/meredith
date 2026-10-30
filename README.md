@@ -1,4 +1,4 @@
-# meredith
+# Dotdash Meredith / People Inc
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,68 +64,174 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-API Evangelist Network profile for **People Inc** (formerly **Dotdash Meredith**) — America's largest digital and print publisher and an IAC operating company.
+Profile for People Inc (formerly Dotdash Meredith) in the API Evangelist network.
+America's largest digital and print publisher, operating 40+ brands including
+PEOPLE, Better Homes & Gardens, Allrecipes, Investopedia, Verywell, Food & Wine,
+Southern Living, Real Simple, Travel + Leisure, Byrdie, InStyle, The Spruce,
+EatingWell, Serious Eats, Simply Recipes, Brides, Health, Shape, Parents,
+Entertainment Weekly, Lifewire, TreeHugger, TripSavvy, The Balance, and more.
+An IAC (NASDAQ: IAC) operating company since the December 2021 merger of
+Dotdash and Meredith Corporation ($2.7B transaction); rebranded to "People Inc."
+on July 31, 2025 to elevate the company's flagship brand. There is no public
+read/write developer API surface — the addressable machine-readable surface is
+per-brand RSS feeds, XML sitemaps, robots.txt policy declarations, and the
+D/Cipher intent-based contextual advertising platform sold as a B2B media buy
+(no self-serve developer console). All major brand domains explicitly disallow
+ClaudeBot, anthropic-ai, CCBot, PerplexityBot and 70+ other AI crawlers in
+robots.txt — with the OpenAI crawlers (GPTBot, OAI-SearchBot, ChatGPT-User)
+notably exempted down to a single /thmb/ path, and sponsored-content paths
+(*/presented/, */integrated/) carved back OUT of the denylist so advertiser
+content stays crawlable while editorial does not. The policy is enforced at
+the Cloudflare edge as well as declared: as of 2026-08-12 every People Inc
+host answers a declared AI crawler with HTTP 402 Payment Required and the
+body "If you wish to license content from People Inc, please contact
+contentlicensing@people.inc". Discovery metadata (robots.txt, sitemap.xml,
+google-news-sitemap.xml and an RFC 9116 security.txt pointing at a private
+HackerOne program) is served at 200 to every client; article and RSS paths
+return 403 to every non-browser client. The map is open, the corpus is not.
 
-- **Corporate site:** https://www.people.inc/
-- **Parent:** IAC (NASDAQ: IAC) — https://www.iac.com/brands/peopleinc
-- **Formed:** December 1, 2021 (Dotdash + Meredith Corporation, $2.7B transaction)
-- **Rebranded:** July 31, 2025 (Dotdash Meredith → People Inc)
-- **Scale (per IAC):** "More than 175 million people trust us each month to help them find inspiration, make decisions, and take action."
-- **Brand count:** 40+ brands across Health, Finance, Food & Drink, Home, Beauty & Style, Travel, Tech & Sustainability, Entertainment, Premium Publishing.
+**Areas:** Media · Publishing · Magazines · Content · Advertising · Contextual Advertising · Lifestyle · News · RSS · Sitemap · Robots · AI Policy
 
-## What this repo profiles
+## Dotdash Meredith / People Inc on APIs.io
 
-People Inc does not publish a public read/write developer API. The machine-readable surface that exists is:
+Everything profiled for Dotdash Meredith / People Inc is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/meredith/](https://apis.io/providers/meredith/)** — or go straight to one of the APIs or properties below.
 
-| Surface | Endpoint pattern | Notes |
-|---|---|---|
-| RSS 2.0 feeds | `https://{brand}/feed` | Available on every consumer brand. The de-facto content API. |
-| XML Sitemaps | `https://{brand}/sitemap.xml` | Sitemap index + per-section files; updated daily. |
-| robots.txt policy | `https://{brand}/robots.txt` | Identical AI-bot policy template across brands. |
-| D/Cipher (B2B) | https://www.people.inc/dcipher | Cookieless intent-based contextual ad platform; sold via direct sales, no public API. |
+### APIs (30)
 
-## Artifacts in this repo
+- [PEOPLE RSS Feeds](https://apis.io/apis/meredith/people-rss-feeds/) — RSS 2.0 feeds for People.com, the flagship celebrity-and-human-interest brand of People Inc. People.com is the largest property in the portfolio (~187M…
+- [Better Homes & Gardens RSS Feeds](https://apis.io/apis/meredith/better-homes-gardens-rss-feeds/) — RSS 2.0 feeds for BHG.com, People Inc's flagship home + gardening brand and the second-largest US monthly magazine by circulation.
+- [Allrecipes RSS Feeds](https://apis.io/apis/meredith/allrecipes-rss-feeds/) — RSS feeds for Allrecipes.com, the largest food brand in the portfolio and one of the most-trafficked recipe sites globally.
+- [Investopedia RSS Feeds](https://apis.io/apis/meredith/investopedia-rss-feeds/) — RSS feeds for Investopedia.com, the dominant retail-investor finance reference site in the portfolio. Carries dictionary-style term entries and breaking…
+- [Verywell Family RSS Feeds](https://apis.io/apis/meredith/verywell-family-rss-feeds/) — RSS feeds across the Verywell sub-brands (Verywell Health, Verywell Mind, Verywell Fit). Largest consumer-health network in the US per Comscore.
+- [Food & Wine RSS Feeds](https://apis.io/apis/meredith/food-wine-rss-feeds/) — RSS feeds for Food & Wine, the culinary lifestyle brand.
+- [Real Simple RSS Feeds](https://apis.io/apis/meredith/real-simple-rss-feeds/) — RSS feeds for Real Simple, a Home + Lifestyle brand.
+- [Southern Living RSS Feeds](https://apis.io/apis/meredith/southern-living-rss-feeds/) — RSS feeds for Southern Living, a regional lifestyle brand.
+- [Travel + Leisure RSS Feeds](https://apis.io/apis/meredith/travel-leisure-rss-feeds/) — RSS feeds for Travel + Leisure, the brand that also seeds the publicly-traded Wyndham Destinations spin-off.
+- [Byrdie RSS Feeds](https://apis.io/apis/meredith/byrdie-rss-feeds/) — RSS feeds for Byrdie, the People Inc beauty brand.
+- [InStyle RSS Feeds](https://apis.io/apis/meredith/instyle-rss-feeds/) — RSS feeds for InStyle, fashion and beauty brand.
+- [Brides RSS Feeds](https://apis.io/apis/meredith/brides-rss-feeds/) — RSS feeds for Brides, the wedding planning brand.
+- [EatingWell RSS Feeds](https://apis.io/apis/meredith/eatingwell-rss-feeds/) — RSS feeds for EatingWell, the healthy-eating food brand.
+- [Serious Eats RSS Feeds](https://apis.io/apis/meredith/serious-eats-rss-feeds/) — RSS feeds for Serious Eats, the technique-driven food brand.
+- [Simply Recipes RSS Feeds](https://apis.io/apis/meredith/simply-recipes-rss-feeds/) — RSS feeds for Simply Recipes.
+- [The Spruce RSS Feeds](https://apis.io/apis/meredith/the-spruce-rss-feeds/) — RSS feeds for The Spruce, The Spruce Eats, and The Spruce Pets.
+- [Health RSS Feeds](https://apis.io/apis/meredith/health-rss-feeds/) — RSS feeds for Health, the wellness magazine brand.
+- [Shape RSS Feeds](https://apis.io/apis/meredith/shape-rss-feeds/) — RSS feeds for Shape, the fitness and women's wellness brand.
+- [Parents RSS Feeds](https://apis.io/apis/meredith/parents-rss-feeds/) — RSS feeds for Parents, the family + parenting brand.
+- [Entertainment Weekly RSS Feeds](https://apis.io/apis/meredith/entertainment-weekly-rss-feeds/) — RSS feeds for Entertainment Weekly.
+- [Lifewire RSS Feeds](https://apis.io/apis/meredith/lifewire-rss-feeds/) — RSS feeds for Lifewire, the consumer-tech how-to brand.
+- [Treehugger RSS Feeds](https://apis.io/apis/meredith/treehugger-rss-feeds/) — RSS feeds for Treehugger, the sustainability and environment brand.
+- [TripSavvy RSS Feeds](https://apis.io/apis/meredith/tripsavvy-rss-feeds/) — RSS feeds for TripSavvy, the travel guides brand.
+- [The Balance RSS Feeds](https://apis.io/apis/meredith/the-balance-rss-feeds/) — RSS feeds for The Balance Money, personal finance brand.
+- [Daily Paws RSS Feeds](https://apis.io/apis/meredith/daily-paws-rss-feeds/) — RSS feeds for Daily Paws, the pets brand.
+- [Martha Stewart RSS Feeds](https://apis.io/apis/meredith/martha-stewart-rss-feeds/) — RSS feeds for MarthaStewart.com, the home/lifestyle brand.
+- [Liquor.com RSS Feeds](https://apis.io/apis/meredith/liquorcom-rss-feeds/) — RSS feeds for Liquor.com, the spirits and cocktail brand.
+- [XML Sitemaps Across Properties](https://apis.io/apis/meredith/xml-sitemaps-across-properties/) — Every People Inc brand exposes a discoverable sitemap index at /sitemap.xml with per-section sitemap files. These are the canonical machine-readable index…
+- [D/Cipher Contextual Advertising Platform](https://apis.io/apis/meredith/dcipher-contextual-advertising-platform/) — D/Cipher is People Inc's proprietary intent-based contextual advertising platform — a cookieless targeting solution that derives audience-intent signals…
+- [Specialty Marketing Solutions (SMS) Suite](https://apis.io/apis/meredith/specialty-marketing-solutions-sms-suite/) — A bundle of B2B services run by People Inc with no public developer surface but with discrete branded sub-products: Content Solutions (content marketing…
 
-- [`apis.yml`](apis.yml) — full inventory of brand RSS surfaces + corporate properties
-- [`json-schema/`](json-schema/) — RSS feed, sitemap, and robots-policy schemas
-- [`json-structure/`](json-structure/) — People Inc brand entity structure
-- [`json-ld/`](json-ld/) — Linked-data context aligning People Inc concepts with schema.org
-- [`examples/`](examples/) — Example payloads (RSS feed, sitemap index, robots policy)
-- [`vocabulary/`](vocabulary/) — Domain vocabulary covering the publisher, brands, products
-- [`capabilities/`](capabilities/) — Naftiko-style capability definitions (shared + workflows)
-- [`rules/`](rules/) — Spectral rules for the RSS schema artifacts
-- [`plans/`](plans/) — Commercial surfaces (advertising, licensing, subscriptions)
-- [`rate-limits/`](rate-limits/) — Edge rate-shaping + the codified AI-bot policy
-- [`finops/`](finops/) — FinOps view of People Inc as a vendor
+### Published properties
 
-## AI bot policy (important)
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Every People Inc brand domain ships an identical `robots.txt` template that **fully disallows** `ClaudeBot`, `Claude-Web`, `anthropic-ai`, `CCBot`, `news-please`, `cohere-ai`, `ImagesiftBot`, `FriendlyCrawler`, `Quora-Bot`, `omgilibot`, `omgili`, and `PerplexityBot`, and **partially restricts** `ChatGPT-User`, `OAI-SearchBot`, and `GPTBot` (blocking the `/thmb/` image-transform subtree). `Pinterest` and `Pinterestbot` are explicitly allowed.
+#### Agentic access (1)
 
-This is the canonical statement of how People Inc treats AI ingestion. Any agent reading People Inc content must honor it.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## Brand portfolio (sampled)
+- [Meredith Agentic Access](https://apis.io/agentic-access/meredith/meredith-agentic-access/)
 
-- **Entertainment:** PEOPLE, PEOPLE en Español, Entertainment Weekly
-- **Home:** Better Homes & Gardens, Real Simple, Southern Living, The Spruce, Martha Stewart, Magnolia, Midwest Living
-- **Food & Drink:** Allrecipes, Food & Wine, EatingWell, Serious Eats, Simply Recipes, The Spruce Eats, Liquor.com
-- **Health:** Verywell Health, Verywell Mind, Verywell Fit, Health, Parents
-- **Finance:** Investopedia, The Balance
-- **Beauty & Style:** Byrdie, Brides, InStyle, Shape
-- **Travel:** Travel + Leisure, TripSavvy
-- **Tech & Sustainability:** Lifewire, Treehugger
-- **Pets:** Daily Paws, The Spruce Pets
-- **Premium Publishing:** Cooking Light, Coastal Living, Traditional Home, LIFE
+#### JSON Schema (3)
 
-## Offices
+The data models the API reads and writes.
 
-- New York — 225 Liberty St, 4th Fl, New York, NY 10281 (HQ; (212) 204-4000)
-- Des Moines — 1716 Locust St, Des Moines, IA 50309 (legacy Meredith HQ)
-- Birmingham — 4100 Old Montgomery Hwy, Birmingham, AL 35209 (Southern Progress legacy)
+- [PeopleIncRobotsPolicy](https://apis.io/schemas/meredith/robots-policy/)
+- [PeopleIncRSSFeed](https://apis.io/schemas/meredith/rss-feed/)
+- [PeopleIncSitemap](https://apis.io/schemas/meredith/sitemap/)
 
-## Sources
+#### JSON Structure (1)
 
-- IAC brand page: https://www.iac.com/brands/peopleinc
-- People Inc corporate site (via Wayback): https://web.archive.org/web/2026/https://www.people.inc/
-- Wikipedia: https://en.wikipedia.org/wiki/People_Inc.
-- Wikipedia: https://en.wikipedia.org/wiki/Meredith_Corporation
+Data models expressed in JSON Structure.
+
+- [Brand Structure](https://apis.io/json-structure/meredith/brand-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Meredith Context](https://apis.io/jsonld/meredith/meredith-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [People Inc / Dotdash Meredith Vocabulary](https://apis.io/vocabularies/meredith/meredith-vocabulary/)
+
+#### Examples (3)
+
+Example requests and responses.
+
+- [Allrecipes Sitemap Index Example](https://apis.io/examples/meredith/allrecipes-sitemap-index-example/)
+- [People Inc Robots Policy Example](https://apis.io/examples/meredith/people-inc-robots-policy-example/)
+- [People Rss Feed Example](https://apis.io/examples/meredith/people-rss-feed-example/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Dotdash Meredith / People Inc — jsonschema rules](https://apis.io/rules/meredith/meredith-jsonschema-spectral-rules/)
+- [Dotdash Meredith / People Inc — people inc rss rules](https://apis.io/rules/meredith/people-inc-rss-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Meredith Domain Security](https://apis.io/security/meredith/meredith-domain-security/)
+- [Meredith Vulnerability Disclosure](https://apis.io/security/meredith/meredith-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Meredith Plans Pricing](https://apis.io/plans/meredith/meredith-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Meredith Rate Limits](https://apis.io/rate-limits/meredith/meredith-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Meredith Finops](https://apis.io/finops/meredith/meredith-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Pricing](https://raw.githubusercontent.com/api-evangelist/meredith/main/plans/meredith-plans-pricing.yml)
+- [Support](https://www.people.inc/contact)
+- [Changelog](https://www.people.inc/news-awards)
+- [Blog](https://www.people.inc/news-awards)
+- [Compliance](https://ir.iac.com/code-business-conduct-and-ethics)
+- [Terms of service](https://www.people.inc/brands-termsofservice)
+- [Privacy policy](https://www.people.inc/privacy-policy)
+- [GitHub](https://github.com/MeredithCorp)
+
+## API Evangelist rating
+
+**Unrated** — no public website could be reached for this company, so there was almost nothing to measure and nothing a reader could check.
+
+This is not a score of zero. No rating is published for this company. If that is wrong because something public exists that we missed, say so on this repository or email [info@apievangelist.com](mailto:info@apievangelist.com) and it will be re-run — free, and no justification needed.
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Dotdash Meredith / People Inc: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/meredith/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
